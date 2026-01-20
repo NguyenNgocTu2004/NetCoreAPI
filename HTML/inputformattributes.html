@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>thuoc tinh cau bieu mau</h1>
+
+<p>Thuộc tính `form` chỉ định biểu mẫu mà phần tử nhập liệu thuộc về.
+
+<form action="/action_page.php" id="form1">
+  <label for="fname">ten</label>
+  <input type="text" id="fname" name="fname"><br><br>
+  <input type="submit" value="Submit">
+</form>
+
+<p>Trường "Họ" bên dưới nằm ngoài phần tử biểu mẫu, nhưng vẫn là một phần của biểu mẫu.
+<br>
+<label for="lname">ho</label>
+<input type="text" id="lname" name="lname" form="form1">
+
+</body>
+</html>
+
