@@ -1,0 +1,15 @@
+D:\HUMG\PTWWeb\NetCoreAPI\NewApp\bin\Debug\net10.0\NewApp.exe
+D:\HUMG\PTWWeb\NetCoreAPI\NewApp\bin\Debug\net10.0\NewApp.deps.json
+D:\HUMG\PTWWeb\NetCoreAPI\NewApp\bin\Debug\net10.0\NewApp.runtimeconfig.json
+D:\HUMG\PTWWeb\NetCoreAPI\NewApp\bin\Debug\net10.0\NewApp.dll
+D:\HUMG\PTWWeb\NetCoreAPI\NewApp\bin\Debug\net10.0\NewApp.pdb
+D:\HUMG\PTWWeb\NetCoreAPI\NewApp\obj\Debug\net10.0\NewApp.GeneratedMSBuildEditorConfig.editorconfig
+D:\HUMG\PTWWeb\NetCoreAPI\NewApp\obj\Debug\net10.0\NewApp.AssemblyInfoInputs.cache
+D:\HUMG\PTWWeb\NetCoreAPI\NewApp\obj\Debug\net10.0\NewApp.AssemblyInfo.cs
+D:\HUMG\PTWWeb\NetCoreAPI\NewApp\obj\Debug\net10.0\NewApp.csproj.CoreCompileInputs.cache
+D:\HUMG\PTWWeb\NetCoreAPI\NewApp\obj\Debug\net10.0\NewApp.sourcelink.json
+D:\HUMG\PTWWeb\NetCoreAPI\NewApp\obj\Debug\net10.0\NewApp.dll
+D:\HUMG\PTWWeb\NetCoreAPI\NewApp\obj\Debug\net10.0\refint\NewApp.dll
+D:\HUMG\PTWWeb\NetCoreAPI\NewApp\obj\Debug\net10.0\NewApp.pdb
+D:\HUMG\PTWWeb\NetCoreAPI\NewApp\obj\Debug\net10.0\NewApp.genruntimeconfig.cache
+D:\HUMG\PTWWeb\NetCoreAPI\NewApp\obj\Debug\net10.0\ref\NewApp.dll
