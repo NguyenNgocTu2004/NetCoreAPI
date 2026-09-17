@@ -1,0 +1,48 @@
+@model DemoMVC.Models.Student
+
+@{
+    ViewData["Title"] = "Chi tiết sinh viên";
+}
+
+<h1>Chi tiết sinh viên</h1>
+
+<div class="card">
+
+    <div class="card-body">
+
+        <p>
+            <strong>ID:</strong>
+            @Model.Id
+        </p>
+
+        <p>
+            <strong>Họ tên:</strong>
+            @Model.FullName
+        </p>
+
+        <p>
+            <strong>Trường:</strong>
+            @Model.School
+        </p>
+
+        <p>
+            <strong>Địa chỉ:</strong>
+            @Model.Address
+        </p>
+
+    </div>
+
+</div>
+
+<br />
+
+<a asp-action="Edit"
+   asp-route-id="@Model.Id"
+   class="btn btn-warning">
+    Sửa
+</a>
+
+<a asp-action="Index"
+   class="btn btn-secondary">
+    Quay lại
+</a>

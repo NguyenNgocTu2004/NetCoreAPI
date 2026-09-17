@@ -1,0 +1,62 @@
+@model DemoMVC.Models.Student
+
+@{
+    ViewData["Title"] = "Xóa sinh viên";
+}
+
+<h1>Xóa sinh viên</h1>
+
+<div class="alert alert-danger">
+
+    <h4>
+        Bạn có chắc chắn muốn xóa sinh viên này?
+    </h4>
+
+</div>
+
+<div class="card">
+
+    <div class="card-body">
+
+        <p>
+            <strong>ID:</strong>
+            @Model.Id
+        </p>
+
+        <p>
+            <strong>Họ tên:</strong>
+            @Model.FullName
+        </p>
+
+        <p>
+            <strong>Trường:</strong>
+            @Model.School
+        </p>
+
+        <p>
+            <strong>Địa chỉ:</strong>
+            @Model.Address
+        </p>
+
+    </div>
+
+</div>
+
+<br />
+
+<form asp-action="Delete" method="post">
+
+    <input type="hidden"
+           asp-for="Id" />
+
+    <button type="submit"
+            class="btn btn-danger">
+        Xác nhận xóa
+    </button>
+
+    <a asp-action="Index"
+       class="btn btn-secondary">
+        Hủy
+    </a>
+
+</form>
