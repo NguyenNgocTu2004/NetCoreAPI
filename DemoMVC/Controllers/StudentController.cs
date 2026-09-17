@@ -14,9 +14,6 @@ namespace DemoMVC.Controllers
             _context = context;
         }
 
-        // ============================
-        // READ - Hiển thị danh sách
-        // ============================
         public async Task<IActionResult> Index()
         {
             var students = await _context.Students.ToListAsync();
@@ -24,10 +21,6 @@ namespace DemoMVC.Controllers
             return View(students);
         }
 
-
-        // ============================
-        // READ - Xem chi tiết
-        // ============================
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -47,9 +40,6 @@ namespace DemoMVC.Controllers
         }
 
 
-        // ============================
-        // CREATE - Hiển thị form
-        // ============================
         [HttpGet]
         public IActionResult Create()
         {
@@ -57,9 +47,6 @@ namespace DemoMVC.Controllers
         }
 
 
-        // ============================
-        // CREATE - Nhận dữ liệu
-        // ============================
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Student student)
@@ -79,9 +66,6 @@ namespace DemoMVC.Controllers
         }
 
 
-        // ============================
-        // UPDATE - Hiển thị form sửa
-        // ============================
         [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -100,10 +84,6 @@ namespace DemoMVC.Controllers
             return View(student);
         }
 
-
-        // ============================
-        // UPDATE - Lưu dữ liệu sửa
-        // ============================
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Student student)
@@ -127,10 +107,6 @@ namespace DemoMVC.Controllers
             return View(student);
         }
 
-
-        // ============================
-        // DELETE - Hiển thị xác nhận
-        // ============================
         [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -150,10 +126,6 @@ namespace DemoMVC.Controllers
             return View(student);
         }
 
-
-        // ============================
-        // DELETE - Xóa dữ liệu
-        // ============================
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
