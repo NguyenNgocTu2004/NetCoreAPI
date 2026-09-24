@@ -13,17 +13,24 @@
     </div>
 }
 
-<div class="mb-3">
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+    </div>
+}
+
+<p>
     <a asp-action="Create" class="btn btn-primary">
         + Thêm sinh viên
     </a>
-</div>
+</p>
 
 <table class="table table-bordered table-striped">
-
     <thead>
         <tr>
             <th>ID</th>
+            <th>Mã sinh viên</th>
             <th>Họ tên</th>
             <th>Trường</th>
             <th>Địa chỉ</th>
@@ -32,29 +39,20 @@
     </thead>
 
     <tbody>
-
         @foreach (var student in Model)
         {
             <tr>
+                <td>@student.Id</td>
+
+                <td>@student.StudentCode</td>
+
+                <td>@student.FullName</td>
+
+                <td>@student.School</td>
+
+                <td>@student.Address</td>
 
                 <td>
-                    @student.Id
-                </td>
-
-                <td>
-                    @student.FullName
-                </td>
-
-                <td>
-                    @student.School
-                </td>
-
-                <td>
-                    @student.Address
-                </td>
-
-                <td>
-
                     <a asp-action="Details"
                        asp-route-id="@student.Id"
                        class="btn btn-info btn-sm">
@@ -72,12 +70,8 @@
                        class="btn btn-danger btn-sm">
                         Xóa
                     </a>
-
                 </td>
-
             </tr>
         }
-
     </tbody>
-
 </table>

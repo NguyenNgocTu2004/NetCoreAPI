@@ -6,49 +6,63 @@
 
 <h1>Sửa sinh viên</h1>
 
+<hr />
+
 <form asp-action="Edit" method="post">
 
     <input type="hidden" asp-for="Id" />
 
-    <div class="mb-3">
+    <div asp-validation-summary="ModelOnly"
+         class="text-danger">
+    </div>
 
-        <label class="form-label">
-            Họ tên
-        </label>
+    <div class="mb-3">
+        <label asp-for="StudentCode" class="form-label"></label>
+
+        <input asp-for="StudentCode"
+               class="form-control" />
+
+        <span asp-validation-for="StudentCode"
+              class="text-danger">
+        </span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="FullName" class="form-label"></label>
 
         <input asp-for="FullName"
                class="form-control" />
 
+        <span asp-validation-for="FullName"
+              class="text-danger">
+        </span>
     </div>
 
-
     <div class="mb-3">
-
-        <label class="form-label">
-            Trường
-        </label>
+        <label asp-for="School" class="form-label"></label>
 
         <input asp-for="School"
                class="form-control" />
 
+        <span asp-validation-for="School"
+              class="text-danger">
+        </span>
     </div>
 
-
     <div class="mb-3">
-
-        <label class="form-label">
-            Địa chỉ
-        </label>
+        <label asp-for="Address" class="form-label"></label>
 
         <input asp-for="Address"
                class="form-control" />
 
+        <span asp-validation-for="Address"
+              class="text-danger">
+        </span>
     </div>
 
-
     <button type="submit"
-            class="btn btn-success">
-        Lưu thay đổi
+            class="btn btn-warning">
+        Cập nhật
     </button>
 
     <a asp-action="Index"
@@ -57,3 +71,10 @@
     </a>
 
 </form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync(
+            "_ValidationScriptsPartial");
+    }
+}

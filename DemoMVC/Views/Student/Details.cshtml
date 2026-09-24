@@ -6,32 +6,61 @@
 
 <h1>Chi tiết sinh viên</h1>
 
-<div class="card">
+<hr />
 
+<div class="card">
     <div class="card-body">
 
-        <p>
-            <strong>ID:</strong>
-            @Model.Id
-        </p>
+        <dl class="row">
 
-        <p>
-            <strong>Họ tên:</strong>
-            @Model.FullName
-        </p>
+            <!-- ID -->
+            <dt class="col-sm-3">
+                ID
+            </dt>
 
-        <p>
-            <strong>Trường:</strong>
-            @Model.School
-        </p>
+            <dd class="col-sm-9">
+                @Model.Id
+            </dd>
 
-        <p>
-            <strong>Địa chỉ:</strong>
-            @Model.Address
-        </p>
+            <!-- Mã sinh viên -->
+            <dt class="col-sm-3">
+                Mã sinh viên
+            </dt>
+
+            <dd class="col-sm-9">
+                @Model.StudentCode
+            </dd>
+
+            <!-- Họ tên -->
+            <dt class="col-sm-3">
+                Họ tên
+            </dt>
+
+            <dd class="col-sm-9">
+                @Model.FullName
+            </dd>
+
+            <!-- Trường -->
+            <dt class="col-sm-3">
+                Trường
+            </dt>
+
+            <dd class="col-sm-9">
+                @Model.School
+            </dd>
+
+            <!-- Địa chỉ -->
+            <dt class="col-sm-3">
+                Địa chỉ
+            </dt>
+
+            <dd class="col-sm-9">
+                @Model.Address
+            </dd>
+
+        </dl>
 
     </div>
-
 </div>
 
 <br />
