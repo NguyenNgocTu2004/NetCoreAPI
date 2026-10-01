@@ -1,7 +1,372 @@
-﻿
-    <h1 class="display-4">Hihi Akiki</h1>
-    
+﻿@{
+    ViewData["Title"] = "Trang chủ";
+}
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        background: linear-gradient(135deg, #eef5ff, #f8fbff);
+    }
+
+    .home-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 30px 15px;
+    }
+
+    /* HERO */
+    .hero {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(135deg, #2563eb, #7c3aed);
+        color: white;
+        border-radius: 25px;
+        padding: 50px 45px;
+        margin-bottom: 30px;
+        box-shadow: 0 15px 35px rgba(37, 99, 235, 0.25);
+    }
+
+    .hero h1 {
+        font-size: 42px;
+        font-weight: 800;
+        margin-bottom: 15px;
+    }
+
+    .hero p {
+        font-size: 18px;
+        max-width: 650px;
+        opacity: 0.9;
+        margin-bottom: 25px;
+    }
+
+    .hero-button {
+        display: inline-block;
+        padding: 12px 24px;
+        border-radius: 30px;
+        background: white;
+        color: #2563eb;
+        text-decoration: none;
+        font-weight: 700;
+        transition: 0.3s;
+    }
+
+    .hero-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        color: #1d4ed8;
+    }
+
+    .circle {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.1);
+    }
+
+    .circle-one {
+        width: 220px;
+        height: 220px;
+        right: -60px;
+        top: -80px;
+    }
+
+    .circle-two {
+        width: 150px;
+        height: 150px;
+        right: 150px;
+        bottom: -80px;
+    }
+
+    /* STATISTICS */
+    .section-title {
+        font-weight: 800;
+        margin: 30px 0 18px;
+        color: #1e293b;
+    }
+
+    .stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .stat-card {
+        background: white;
+        border-radius: 20px;
+        padding: 25px;
+        box-shadow: 0 8px 25px rgba(15, 23, 42, 0.08);
+        transition: 0.3s;
+        border: 1px solid #eef2f7;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-7px);
+        box-shadow: 0 15px 30px rgba(15, 23, 42, 0.12);
+    }
+
+    .stat-icon {
+        width: 55px;
+        height: 55px;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+        margin-bottom: 15px;
+    }
+
+    .blue {
+        background: #dbeafe;
+    }
+
+    .green {
+        background: #dcfce7;
+    }
+
+    .orange {
+        background: #ffedd5;
+    }
+
+    .stat-card h3 {
+        font-size: 28px;
+        margin: 0;
+        color: #1e293b;
+    }
+
+    .stat-card p {
+        margin: 5px 0 0;
+        color: #64748b;
+    }
+
+    /* QUICK ACCESS */
+    .quick-access {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .quick-card {
+        background: white;
+        border-radius: 20px;
+        padding: 25px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        text-decoration: none;
+        color: #1e293b;
+        border: 1px solid #eef2f7;
+        box-shadow: 0 8px 25px rgba(15, 23, 42, 0.07);
+        transition: 0.3s;
+    }
+
+    .quick-card:hover {
+        transform: translateY(-5px);
+        color: #2563eb;
+        box-shadow: 0 15px 30px rgba(15, 23, 42, 0.12);
+    }
+
+    .quick-icon {
+        min-width: 65px;
+        height: 65px;
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+    }
+
+    .student-icon {
+        background: #dbeafe;
+    }
+
+    .employee-icon {
+        background: #fce7f3;
+    }
+
+    .quick-card h4 {
+        margin: 0 0 5px;
+        font-weight: 700;
+    }
+
+    .quick-card p {
+        margin: 0;
+        color: #64748b;
+        font-size: 14px;
+    }
+
+    /* FOOTER MESSAGE */
+    .welcome-box {
+        margin-top: 30px;
+        padding: 25px;
+        background: white;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 8px 25px rgba(15, 23, 42, 0.07);
+    }
+
+    .welcome-box h3 {
+        font-weight: 700;
+        color: #1e293b;
+    }
+
+    .welcome-box p {
+        color: #64748b;
+        margin-bottom: 0;
+    }
+
+    /* RESPONSIVE */
+    @@media (max-width: 768px) {
+        .hero {
+            padding: 35px 25px;
+        }
+
+        .hero h1 {
+            font-size: 32px;
+        }
+
+        .stats {
+            grid-template-columns: 1fr;
+        }
+
+        .quick-access {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<div class="home-container">
+
+    <!-- HERO -->
+    <div class="hero">
+
+        <div class="circle circle-one"></div>
+        <div class="circle circle-two"></div>
+
+        <h1>👋 NgTus xin chào</h1>
+
+        <p style="margin-left: 30px;">
+            
+            Hệ thống quản lý thông tin được xây dựng bằng
+            ASP.NET Core MVC và Entity Framework Core.
+        </p>
+
+        <a asp-controller="Student"
+           asp-action="Index"
+           class="hero-button">
+            🎓 Quản lý sinh viên
+        </a>
+         <a asp-controller="NhanVien"
+         style="margin-left: 10px;"
+           asp-action="Index"
+           class="hero-button">
+            👨‍💼 Quản lý nhân viên
+        </a>
+
+    </div>
 
 
+    <!-- THỐNG KÊ -->
+    <h2 class="section-title">📊 Tổng quan hệ thống</h2>
+
+    <div class="stats">
+
+        <div class="stat-card">
+
+            <div class="stat-icon blue">
+                🎓
+            </div>
+
+            <h3>Student</h3>
+
+            <p>Quản lý thông tin sinh viên</p>
+
+        </div>
 
 
+        <div class="stat-card">
+
+            <div class="stat-icon green">
+                👨‍💼
+            </div>
+
+            <h3>Nhân viên</h3>
+
+            <p>Quản lý thông tin nhân viên</p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon orange">
+                🗄️
+            </div>
+
+            <h3>SQLite</h3>
+
+            <p>Lưu trữ dữ liệu hệ thống</p>
+
+        </div>
+
+    </div>
+
+
+    <!-- TRUY CẬP NHANH -->
+    <h2 class="section-title">🚀 Truy cập nhanh</h2>
+
+    <div class="quick-access">
+
+        <a asp-controller="Student"
+           asp-action="Index"
+           class="quick-card">
+
+            <div class="quick-icon student-icon">
+                🎓
+            </div>
+
+            <div>
+                <h4>Quản lý sinh viên</h4>
+
+                <p>
+                    Xem, thêm, sửa và xóa thông tin sinh viên.
+                </p>
+            </div>
+
+        </a>
+
+
+        <a asp-controller="NhanVien"
+           asp-action="Index"
+           class="quick-card">
+
+            <div class="quick-icon employee-icon">
+                👨‍💼
+            </div>
+
+            <div>
+                <h4>Quản lý nhân viên</h4>
+
+                <p>
+                    Quản lý thông tin nhân viên trong hệ thống.
+                </p>
+            </div>
+
+        </a>
+
+    </div>
+
+
+    <!-- THÔNG BÁO -->
+    <div class="welcome-box">
+
+        <h3>💻 ASP.NET Core MVC</h3>
+
+        <p>
+            Giao diện được thiết kế đơn giản, hiện đại và dễ sử dụng.
+        </p>
+
+    </div>
+
+</div>

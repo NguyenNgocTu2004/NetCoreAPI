@@ -1,0 +1,141 @@
+/* ==============================
+   STUDENT - FLOWER & LEAF STYLE
+   ============================== */
+
+.student-page {
+    min-height: 80vh;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #e8f8e8, #fff8dc, #e0f7fa);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hoa trang trí */
+.student-page::before {
+    content: "🌸 🌼 🌺 🌻 🌷";
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    font-size: 35px;
+    letter-spacing: 12px;
+}
+
+.student-page::after {
+    content: "🌿 🍃 🌱 🌿 🍀";
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    font-size: 35px;
+    letter-spacing: 10px;
+}
+
+/* Khung chính */
+.student-container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 35px;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(40, 100, 50, 0.18);
+    border: 3px solid #b7dfb9;
+    position: relative;
+    z-index: 1;
+}
+
+/* Tiêu đề */
+.student-title {
+    text-align: center;
+    color: #27833f;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.student-subtitle {
+    text-align: center;
+    color: #777;
+    margin-bottom: 30px;
+}
+
+/* Form */
+.student-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    gap: 12px;
+    align-items: center;
+}
+
+/* Ô nhập */
+.student-input {
+    height: 45px;
+    padding: 0 15px;
+    border: 2px solid #b7dcb8;
+    border-radius: 12px;
+    outline: none;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.student-input:focus {
+    border-color: #42a85f;
+    box-shadow: 0 0 10px rgba(66, 168, 95, 0.25);
+}
+
+/* Nút */
+.student-button {
+    height: 45px;
+    padding: 0 20px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #ff6f91, #ff9671);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.student-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 15px rgba(255, 111, 145, 0.35);
+}
+
+/* Kết quả */
+.student-result {
+    margin-top: 30px;
+    padding: 20px;
+    background: linear-gradient(135deg, #f0fff0, #fffbea);
+    border-left: 6px solid #42a85f;
+    border-radius: 15px;
+}
+
+.student-result h3 {
+    color: #27833f;
+    margin-bottom: 15px;
+}
+
+.student-result p {
+    margin: 8px 0;
+    font-size: 17px;
+}
+
+/* Responsive cho điện thoại */
+@media (max-width: 768px) {
+
+    .student-form {
+        grid-template-columns: 1fr;
+    }
+
+    .student-container {
+        padding: 25px 20px;
+    }
+
+    .student-title {
+        font-size: 26px;
+    }
+
+    .student-page::before,
+    .student-page::after {
+        font-size: 25px;
+    }
+}

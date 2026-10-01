@@ -366,3 +366,10 @@ D:\HUMG\PTWWeb\NetcoreAPI\DemoMVC\bin\Debug\net10.0\runtimes\win\lib\net9.0\Micr
 D:\HUMG\PTWWeb\NetcoreAPI\DemoMVC\bin\Debug\net10.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
 D:\HUMG\PTWWeb\NetcoreAPI\DemoMVC\bin\Debug\net10.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 D:\HUMG\PTWWeb\NetcoreAPI\DemoMVC\bin\Debug\net10.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+D:\HUMG\PTWWeb\NetcoreAPI\DemoMVC\bin\Debug\net10.0\publish\web.config
+D:\HUMG\PTWWeb\NetcoreAPI\DemoMVC\bin\Debug\net10.0\publish\appsettings.Development.json
+D:\HUMG\PTWWeb\NetcoreAPI\DemoMVC\bin\Debug\net10.0\publish\appsettings.json
+D:\HUMG\PTWWeb\NetcoreAPI\DemoMVC\bin\Debug\net10.0\publish\DemoMVC.deps.json
+D:\HUMG\PTWWeb\NetcoreAPI\DemoMVC\bin\Debug\net10.0\publish\DemoMVC.runtimeconfig.json
+D:\HUMG\PTWWeb\NetcoreAPI\DemoMVC\bin\Debug\net10.0\publish\DemoMVC.staticwebassets.endpoints.json
+D:\HUMG\PTWWeb\NetcoreAPI\DemoMVC\bin\Debug\net10.0\DemoMVC.db
