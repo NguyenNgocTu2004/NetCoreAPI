@@ -1,0 +1,49 @@
+@model IEnumerable<DemoMVC.Models.NhanVien>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Mã nhân viên</th>
+            <th>Họ tên</th>
+            <th>Chức vụ</th>
+            <th>Phòng ban</th>
+            <th>Lương</th>
+            <th>Chức năng</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.MaNhanVien</td>
+                <td>@item.HoTen</td>
+                <td>@item.ChucVu</td>
+                <td>@item.PhongBan</td>
+                <td>@item.Luong</td>
+                <td class="text-nowrap">
+                    <a asp-action="Details"
+                       asp-route-id="@item.Id"
+                       class="btn btn-info btn-sm"
+                       data-crud-modal
+                       data-modal-title="Chi tiết nhân viên">
+                        Xem
+                    </a>
+                    <a asp-action="Edit"
+                       asp-route-id="@item.Id"
+                       class="btn btn-warning btn-sm"
+                       data-crud-modal
+                       data-modal-title="Sửa nhân viên">
+                        Sửa
+                    </a>
+                    <a asp-action="Delete"
+                       asp-route-id="@item.Id"
+                       class="btn btn-danger btn-sm"
+                       data-crud-modal
+                       data-modal-title="Xóa nhân viên">
+                        Xóa
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

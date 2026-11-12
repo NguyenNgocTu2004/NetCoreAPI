@@ -1,0 +1,49 @@
+@model IEnumerable<DemoMVC.Models.Student>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Mã sinh viên</th>
+            <th>Họ tên</th>
+            <th>Trường</th>
+            <th>Địa chỉ</th>
+            <th>Chức năng</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model)
+        {
+            <tr>
+                <td>@student.Id</td>
+                <td>@student.StudentCode</td>
+                <td>@student.FullName</td>
+                <td>@student.School</td>
+                <td>@student.Address</td>
+                <td class="text-nowrap">
+                    <a asp-action="Details"
+                       asp-route-id="@student.Id"
+                       class="btn btn-info btn-sm"
+                       data-crud-modal
+                       data-modal-title="Chi tiết sinh viên">
+                        Xem
+                    </a>
+                    <a asp-action="Edit"
+                       asp-route-id="@student.Id"
+                       class="btn btn-warning btn-sm"
+                       data-crud-modal
+                       data-modal-title="Sửa sinh viên">
+                        Sửa
+                    </a>
+                    <a asp-action="Delete"
+                       asp-route-id="@student.Id"
+                       class="btn btn-danger btn-sm"
+                       data-crud-modal
+                       data-modal-title="Xóa sinh viên">
+                        Xóa
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

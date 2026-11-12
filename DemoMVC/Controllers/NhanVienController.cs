@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DemoMVC.Data;
 using DemoMVC.Models;
@@ -19,13 +14,23 @@ namespace DemoMVC.Controllers
             _context = context;
         }
 
-        // GET: NhanVien
         public async Task<IActionResult> Index()
         {
-            return View(await _context.NhanViens.ToListAsync());
+            var nhanViens = await _context.NhanViens.ToListAsync();
+            return IsAjaxRequest()
+                ? PartialView("_NhanVienTable", nhanViens)
+                : View(nhanViens);
         }
 
-        // GET: NhanVien/Details/5
+        [HttpGet]
+        public async Task<IActionResult> List()
+        {
+            return PartialView(
+                "_NhanVienTable",
+                await _context.NhanViens.ToListAsync());
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -40,18 +45,19 @@ namespace DemoMVC.Controllers
                 return NotFound();
             }
 
-            return View(nhanVien);
+            return IsAjaxRequest()
+                ? PartialView("_Details", nhanVien)
+                : View(nhanVien);
         }
 
-        // GET: NhanVien/Create
+        [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            return IsAjaxRequest()
+                ? PartialView("_Form", new NhanVien())
+                : View();
         }
 
-        // POST: NhanVien/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,MaNhanVien,HoTen,ChucVu,PhongBan,Luong")] NhanVien nhanVien)
@@ -60,12 +66,19 @@ namespace DemoMVC.Controllers
             {
                 _context.Add(nhanVien);
                 await _context.SaveChangesAsync();
+
+                if (IsAjaxRequest())
+                {
+                    return Json(new { message = "Thêm nhân viên thành công!" });
+                }
+
                 return RedirectToAction(nameof(Index));
             }
-            return View(nhanVien);
+
+            return InvalidNhanVienForm(nhanVien);
         }
 
-        // GET: NhanVien/Edit/5
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -78,12 +91,11 @@ namespace DemoMVC.Controllers
             {
                 return NotFound();
             }
-            return View(nhanVien);
+            return IsAjaxRequest()
+                ? PartialView("_Form", nhanVien)
+                : View(nhanVien);
         }
 
-        // POST: NhanVien/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,MaNhanVien,HoTen,ChucVu,PhongBan,Luong")] NhanVien nhanVien)
@@ -97,7 +109,17 @@ namespace DemoMVC.Controllers
             {
                 try
                 {
-                    _context.Update(nhanVien);
+                    var existingNhanVien = await _context.NhanViens.FindAsync(id);
+                    if (existingNhanVien == null)
+                    {
+                        return NotFound();
+                    }
+
+                    existingNhanVien.MaNhanVien = nhanVien.MaNhanVien;
+                    existingNhanVien.HoTen = nhanVien.HoTen;
+                    existingNhanVien.ChucVu = nhanVien.ChucVu;
+                    existingNhanVien.PhongBan = nhanVien.PhongBan;
+                    existingNhanVien.Luong = nhanVien.Luong;
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -108,15 +130,29 @@ namespace DemoMVC.Controllers
                     }
                     else
                     {
+                        if (IsAjaxRequest())
+                        {
+                            return StatusCode(
+                                StatusCodes.Status409Conflict,
+                                new { message = "Bản ghi đã được thay đổi bởi một thao tác khác." });
+                        }
+
                         throw;
                     }
                 }
+
+                if (IsAjaxRequest())
+                {
+                    return Json(new { message = "Cập nhật nhân viên thành công!" });
+                }
+
                 return RedirectToAction(nameof(Index));
             }
-            return View(nhanVien);
+
+            return InvalidNhanVienForm(nhanVien);
         }
 
-        // GET: NhanVien/Delete/5
+        [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -131,27 +167,62 @@ namespace DemoMVC.Controllers
                 return NotFound();
             }
 
-            return View(nhanVien);
+            ViewData["IsDelete"] = true;
+            return IsAjaxRequest()
+                ? PartialView("_Details", nhanVien)
+                : View(nhanVien);
         }
 
-        // POST: NhanVien/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var nhanVien = await _context.NhanViens.FindAsync(id);
-            if (nhanVien != null)
+            if (nhanVien == null)
             {
-                _context.NhanViens.Remove(nhanVien);
+                return NotFound();
             }
 
-            await _context.SaveChangesAsync();
+            _context.NhanViens.Remove(nhanVien);
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException) when (IsAjaxRequest())
+            {
+                return StatusCode(
+                    StatusCodes.Status409Conflict,
+                    new { message = "Không thể xóa nhân viên vì dữ liệu này đang được sử dụng." });
+            }
+
+            if (IsAjaxRequest())
+            {
+                return Json(new { message = "Xóa nhân viên thành công!" });
+            }
+
             return RedirectToAction(nameof(Index));
         }
 
         private bool NhanVienExists(int id)
         {
             return _context.NhanViens.Any(e => e.Id == id);
+        }
+
+        private bool IsAjaxRequest()
+        {
+            return Request.Headers["X-Requested-With"] == "XMLHttpRequest";
+        }
+
+        private IActionResult InvalidNhanVienForm(NhanVien nhanVien)
+        {
+            if (IsAjaxRequest())
+            {
+                Response.StatusCode = StatusCodes.Status422UnprocessableEntity;
+                return PartialView("_Form", nhanVien);
+            }
+
+            return View(nhanVien);
         }
     }
 }

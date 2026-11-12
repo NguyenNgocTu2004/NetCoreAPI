@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Bảng dữ liệu sinh viên";
+    var currentFilter = ViewData["CurrentFilter"] as string;
 }
 
 <h1>Bảng dữ liệu sinh viên</h1>
@@ -20,58 +21,33 @@
     </div>
 }
 
+<form asp-action="Index" method="get" class="row g-2 mb-3">
+    <div class="col-md-8">
+        <input type="text"
+               name="searchString"
+               value="@currentFilter"
+               class="form-control"
+               placeholder="Tìm theo mã, họ tên, trường hoặc địa chỉ" />
+    </div>
+    <div class="col-md-4 d-flex gap-2">
+        <button type="submit" class="btn btn-primary flex-fill">
+            Tìm kiếm
+        </button>
+        <a asp-action="Index" class="btn btn-outline-secondary flex-fill">
+            Làm mới
+        </a>
+    </div>
+</form>
+
 <p>
-    <a asp-action="Create" class="btn btn-primary">
+    <a asp-action="Create"
+       class="btn btn-primary"
+       data-crud-modal
+       data-modal-title="Thêm sinh viên">
         + Thêm sinh viên
     </a>
 </p>
 
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Mã sinh viên</th>
-            <th>Họ tên</th>
-            <th>Trường</th>
-            <th>Địa chỉ</th>
-            <th>Chức năng</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        @foreach (var student in Model)
-        {
-            <tr>
-                <td>@student.Id</td>
-
-                <td>@student.StudentCode</td>
-
-                <td>@student.FullName</td>
-
-                <td>@student.School</td>
-
-                <td>@student.Address</td>
-
-                <td>
-                    <a asp-action="Details"
-                       asp-route-id="@student.Id"
-                       class="btn btn-info btn-sm">
-                        Xem
-                    </a>
-
-                    <a asp-action="Edit"
-                       asp-route-id="@student.Id"
-                       class="btn btn-warning btn-sm">
-                        Sửa
-                    </a>
-
-                    <a asp-action="Delete"
-                       asp-route-id="@student.Id"
-                       class="btn btn-danger btn-sm">
-                        Xóa
-                    </a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div id="student-table-container" data-list-url="@Url.Action("List")">
+    <partial name="_StudentTable" model="Model" />
+</div>

@@ -1,0 +1,41 @@
+@model DemoMVC.Models.NhanVien
+
+@{
+    var actionName = Model.Id == 0 ? "Create" : "Edit";
+}
+
+<form asp-action="@actionName"
+      asp-route-id="@(Model.Id == 0 ? (int?)null : Model.Id)"
+      method="post">
+    <input asp-for="Id" type="hidden" />
+    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+    <div class="mb-3">
+        <label asp-for="MaNhanVien" class="form-label"></label>
+        <input asp-for="MaNhanVien" class="form-control" />
+        <span asp-validation-for="MaNhanVien" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="HoTen" class="form-label"></label>
+        <input asp-for="HoTen" class="form-control" />
+        <span asp-validation-for="HoTen" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="ChucVu" class="form-label"></label>
+        <input asp-for="ChucVu" class="form-control" />
+        <span asp-validation-for="ChucVu" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="PhongBan" class="form-label"></label>
+        <input asp-for="PhongBan" class="form-control" />
+        <span asp-validation-for="PhongBan" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Luong" class="form-label"></label>
+        <input asp-for="Luong" class="form-control" />
+        <span asp-validation-for="Luong" class="text-danger"></span>
+    </div>
+    <div class="d-flex justify-content-end gap-2">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+        <button type="submit" class="btn btn-primary">Lưu</button>
+    </div>
+</form>

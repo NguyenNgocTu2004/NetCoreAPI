@@ -1,0 +1,42 @@
+@model DemoMVC.Models.Student
+
+@{
+    var isDelete = ViewData["IsDelete"] as bool? == true;
+}
+
+<dl class="row">
+    <dt class="col-sm-3">ID</dt>
+    <dd class="col-sm-9">@Model.Id</dd>
+    <dt class="col-sm-3">Mã sinh viên</dt>
+    <dd class="col-sm-9">@Model.StudentCode</dd>
+    <dt class="col-sm-3">Họ tên</dt>
+    <dd class="col-sm-9">@Model.FullName</dd>
+    <dt class="col-sm-3">Trường</dt>
+    <dd class="col-sm-9">@Model.School</dd>
+    <dt class="col-sm-3">Địa chỉ</dt>
+    <dd class="col-sm-9">@Model.Address</dd>
+</dl>
+
+@if (isDelete)
+{
+    <form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+        <input asp-for="Id" type="hidden" />
+        <div class="d-flex justify-content-end gap-2">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+            <button type="submit" class="btn btn-danger">Xác nhận xóa</button>
+        </div>
+    </form>
+}
+else
+{
+    <div class="d-flex justify-content-end gap-2">
+        <a asp-action="Edit"
+           asp-route-id="@Model.Id"
+           class="btn btn-warning"
+           data-crud-modal
+           data-modal-title="Sửa sinh viên">
+            Sửa
+        </a>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+    </div>
+}

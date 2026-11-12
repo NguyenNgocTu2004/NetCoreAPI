@@ -27,10 +27,10 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark"asp-area=""asp-controller="Student"asp-action="Index">Sinh viên</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Index">Sinh viên</a>
                         </li>
-                                                <li class="nav-item">
-                            <a class="nav-link text-dark"asp-area=""asp-controller="Nhanvien"asp-action="Index">Nhân viên</a>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="NhanVien" asp-action="Index">Nhân viên</a>
                         </li>
                     </ul>
                 </div>
@@ -38,9 +38,25 @@
         </nav>
     </header>
     <div class="container">
+        <div id="crud-alert" class="alert d-none" role="status" aria-live="polite"></div>
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
+    </div>
+
+    <div class="modal fade" id="crud-modal" tabindex="-1" aria-labelledby="crud-modal-title" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title fs-5" id="crud-modal-title"></h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="crud-modal-feedback" class="alert alert-danger d-none" role="alert"></div>
+                    <div id="crud-modal-content"></div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <footer class="border-top footer text-muted">
@@ -49,6 +65,8 @@
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
