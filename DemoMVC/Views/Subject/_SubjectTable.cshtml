@@ -1,4 +1,7 @@
 @model IEnumerable<DemoMVC.Models.Subject>
+@{
+    var canManageData = User.IsInRole(IdentitySeeder.AdminRole) || User.IsInRole(IdentitySeeder.DepartmentRole);
+}
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -19,10 +22,13 @@
                 <td class="text-nowrap">
                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm"
                        data-crud-modal data-modal-title="Chi tiết môn học">Xem</a>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm"
-                       data-crud-modal data-modal-title="Sửa môn học">Sửa</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm"
-                       data-crud-modal data-modal-title="Xóa môn học">Xóa</a>
+                    @if (canManageData)
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm"
+                           data-crud-modal data-modal-title="Sửa môn học">Sửa</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm"
+                           data-crud-modal data-modal-title="Xóa môn học">Xóa</a>
+                    }
                 </td>
             </tr>
         }

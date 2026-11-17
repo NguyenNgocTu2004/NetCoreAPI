@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DemoMVC.Controllers
 {
-    [Authorize(Roles = IdentitySeeder.AdminRole + "," + IdentitySeeder.DepartmentRole)]
+    [Authorize(Roles = IdentitySeeder.DataViewerRoles)]
     public class GradeController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -78,6 +78,7 @@ namespace DemoMVC.Controllers
                 : View(grade);
         }
 
+        [Authorize(Roles = IdentitySeeder.DataManagerRoles)]
         [HttpGet]
         public IActionResult Create()
         {
@@ -87,6 +88,7 @@ namespace DemoMVC.Controllers
                 : View(new Grade());
         }
 
+        [Authorize(Roles = IdentitySeeder.DataManagerRoles)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Grade grade)
@@ -109,6 +111,7 @@ namespace DemoMVC.Controllers
             return InvalidGradeForm(grade);
         }
 
+        [Authorize(Roles = IdentitySeeder.DataManagerRoles)]
         [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -129,6 +132,7 @@ namespace DemoMVC.Controllers
                 : View(grade);
         }
 
+        [Authorize(Roles = IdentitySeeder.DataManagerRoles)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Grade grade)
@@ -165,6 +169,7 @@ namespace DemoMVC.Controllers
             return InvalidGradeForm(grade);
         }
 
+        [Authorize(Roles = IdentitySeeder.DataManagerRoles)]
         [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -188,6 +193,7 @@ namespace DemoMVC.Controllers
                 : View(grade);
         }
 
+        [Authorize(Roles = IdentitySeeder.DataManagerRoles)]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

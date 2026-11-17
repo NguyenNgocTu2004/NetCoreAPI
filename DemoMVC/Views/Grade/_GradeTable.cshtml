@@ -1,4 +1,7 @@
 @model IEnumerable<DemoMVC.Models.Grade>
+@{
+    var canManageData = User.IsInRole(IdentitySeeder.AdminRole) || User.IsInRole(IdentitySeeder.DepartmentRole);
+}
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -29,10 +32,13 @@
                 <td class="text-nowrap">
                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm"
                        data-crud-modal data-modal-title="Chi tiết điểm">Xem</a>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm"
-                       data-crud-modal data-modal-title="Sửa điểm">Sửa</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm"
-                       data-crud-modal data-modal-title="Xóa điểm">Xóa</a>
+                    @if (canManageData)
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm"
+                           data-crud-modal data-modal-title="Sửa điểm">Sửa</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm"
+                           data-crud-modal data-modal-title="Xóa điểm">Xóa</a>
+                    }
                 </td>
             </tr>
         }

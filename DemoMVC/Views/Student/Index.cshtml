@@ -39,14 +39,17 @@
     </div>
 </form>
 
-<p>
-    <a asp-action="Create"
-       class="btn btn-primary"
-       data-crud-modal
-       data-modal-title="Thêm sinh viên">
-        + Thêm sinh viên
-    </a>
-</p>
+@if (User.IsInRole(IdentitySeeder.AdminRole) || User.IsInRole(IdentitySeeder.DepartmentRole))
+{
+    <p>
+        <a asp-action="Create"
+           class="btn btn-primary"
+           data-crud-modal
+           data-modal-title="Thêm sinh viên">
+            + Thêm sinh viên
+        </a>
+    </p>
+}
 
 <div id="student-table-container" data-list-url="@Url.Action("List")">
     <partial name="_StudentTable" model="Model" />

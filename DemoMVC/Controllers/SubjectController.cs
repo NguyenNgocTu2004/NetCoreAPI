@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DemoMVC.Controllers
 {
-    [Authorize(Roles = IdentitySeeder.AdminRole + "," + IdentitySeeder.DepartmentRole)]
+    [Authorize(Roles = IdentitySeeder.DataViewerRoles)]
     public class SubjectController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -58,6 +58,7 @@ namespace DemoMVC.Controllers
                 : View(subject);
         }
 
+        [Authorize(Roles = IdentitySeeder.DataManagerRoles)]
         [HttpGet]
         public IActionResult Create()
         {
@@ -66,6 +67,7 @@ namespace DemoMVC.Controllers
                 : View(new Subject());
         }
 
+        [Authorize(Roles = IdentitySeeder.DataManagerRoles)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Subject subject)
@@ -92,6 +94,7 @@ namespace DemoMVC.Controllers
             return InvalidSubjectForm(subject);
         }
 
+        [Authorize(Roles = IdentitySeeder.DataManagerRoles)]
         [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -111,6 +114,7 @@ namespace DemoMVC.Controllers
                 : View(subject);
         }
 
+        [Authorize(Roles = IdentitySeeder.DataManagerRoles)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Subject subject)
@@ -152,6 +156,7 @@ namespace DemoMVC.Controllers
             return InvalidSubjectForm(subject);
         }
 
+        [Authorize(Roles = IdentitySeeder.DataManagerRoles)]
         [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -174,6 +179,7 @@ namespace DemoMVC.Controllers
                 : View(subject);
         }
 
+        [Authorize(Roles = IdentitySeeder.DataManagerRoles)]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

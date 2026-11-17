@@ -5,7 +5,7 @@
 - Các trang nghiệp vụ yêu cầu đăng nhập; `/Account/Login` và `/Account/Register` cho phép truy cập công khai.
 - `Admin` quản lý tài khoản và có thể tạo, đổi vai trò hoặc xóa tài khoản `DP`/`User`. Tài khoản Admin và tài khoản Admin đang đăng nhập không thể bị đổi vai trò hoặc xóa từ giao diện quản lý.
 - `DP` được xem danh sách tài khoản và được thêm, sửa, xem, xóa sinh viên, lớp học, môn học và điểm.
-- Người tự đăng ký luôn được gán vai trò `User`; vai trò không thể chọn từ form đăng ký. `User` không được truy cập các trang nghiệp vụ.
+- Người tự đăng ký luôn được gán vai trò `User`; vai trò không thể chọn từ form đăng ký. `User` được xem sinh viên, lớp học, môn học và điểm ở chế độ chỉ đọc; không thể thêm, sửa, xóa hoặc truy cập mục Tài khoản.
 - Vai trò cũ `Staff` được chuyển sang `DP` khi ứng dụng khởi động.
 - Tài khoản Admin đầu tiên được khởi tạo từ cấu hình bảo mật, không dùng mật khẩu mặc định.
 

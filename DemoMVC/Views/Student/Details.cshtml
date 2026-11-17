@@ -74,11 +74,14 @@
 
 <br />
 
-<a asp-action="Edit"
-   asp-route-id="@Model.Id"
-   class="btn btn-warning">
-    Sửa
-</a>
+@if (User.IsInRole(IdentitySeeder.AdminRole) || User.IsInRole(IdentitySeeder.DepartmentRole))
+{
+    <a asp-action="Edit"
+       asp-route-id="@Model.Id"
+       class="btn btn-warning">
+        Sửa
+    </a>
+}
 
 <a asp-action="Index"
    class="btn btn-secondary">

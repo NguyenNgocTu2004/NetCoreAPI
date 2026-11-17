@@ -7,6 +7,8 @@ public static class IdentitySeeder
     public const string AdminRole = "Admin";
     public const string DepartmentRole = "DP";
     public const string UserRole = "User";
+    public const string DataManagerRoles = AdminRole + "," + DepartmentRole;
+    public const string DataViewerRoles = DataManagerRoles + "," + UserRole;
     private const string LegacyStaffRole = "Staff";
 
     public static async Task SeedAsync(

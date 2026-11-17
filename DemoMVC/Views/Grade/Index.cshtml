@@ -33,10 +33,13 @@
     </div>
 </form>
 
-<p>
-    <a asp-action="Create" class="btn btn-primary" data-crud-modal
-       data-modal-title="Thêm điểm">+ Thêm điểm</a>
-</p>
+@if (User.IsInRole(IdentitySeeder.AdminRole) || User.IsInRole(IdentitySeeder.DepartmentRole))
+{
+    <p>
+        <a asp-action="Create" class="btn btn-primary" data-crud-modal
+           data-modal-title="Thêm điểm">+ Thêm điểm</a>
+    </p>
+}
 
 <div data-list-url="@Url.Action("List")">
     <partial name="_GradeTable" model="Model" />

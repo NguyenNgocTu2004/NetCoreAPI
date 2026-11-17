@@ -2,6 +2,7 @@
 
 @{
     var isDelete = ViewData["IsDelete"] as bool? == true;
+    var canManageData = User.IsInRole(IdentitySeeder.AdminRole) || User.IsInRole(IdentitySeeder.DepartmentRole);
 }
 
 <dl class="row">
@@ -19,7 +20,7 @@
     <dd class="col-sm-8">@Model.XepLoai</dd>
 </dl>
 
-@if (isDelete)
+@if (isDelete && canManageData)
 {
     <form asp-action="Delete" asp-route-id="@Model.Id" method="post">
         <input type="hidden" name="id" value="@Model.Id" />
@@ -32,8 +33,11 @@
 else
 {
     <div class="d-flex justify-content-end gap-2">
-        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning"
-           data-crud-modal data-modal-title="Sửa điểm">Sửa</a>
+        @if (canManageData && !isDelete)
+        {
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning"
+               data-crud-modal data-modal-title="Sửa điểm">Sửa</a>
+        }
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
     </div>
 }
