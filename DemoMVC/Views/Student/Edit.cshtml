@@ -50,6 +50,34 @@
     </div>
 
     <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="NgaySinh" class="form-label"></label>
+        <input asp-for="NgaySinh" type="date" class="form-control" />
+        <span asp-validation-for="NgaySinh" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="GioiTinh" class="form-label"></label>
+        <select asp-for="GioiTinh" class="form-select">
+            <option value="">-- Chọn giới tính --</option>
+            <option value="Nam">Nam</option>
+            <option value="Nữ">Nữ</option>
+            <option value="Khác">Khác</option>
+        </select>
+        <span asp-validation-for="GioiTinh" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="ClassId" class="form-label"></label>
+        <select asp-for="ClassId" asp-items="ViewBag.ClassId" class="form-select">
+            <option value="">-- Chưa xếp lớp --</option>
+        </select>
+        <span asp-validation-for="ClassId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
         <label asp-for="Address" class="form-label"></label>
 
         <input asp-for="Address"

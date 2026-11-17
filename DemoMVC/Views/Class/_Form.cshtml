@@ -1,0 +1,39 @@
+@model DemoMVC.Models.StudentClass
+
+@{
+    var actionName = Model.Id == 0 ? "Create" : "Edit";
+}
+
+<form asp-action="@actionName" asp-route-id="@(Model.Id == 0 ? (int?)null : Model.Id)" method="post">
+    <input asp-for="Id" type="hidden" />
+    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+    <div class="mb-3">
+        <label asp-for="MaLop" class="form-label"></label>
+        <input asp-for="MaLop" class="form-control" />
+        <span asp-validation-for="MaLop" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="TenLop" class="form-label"></label>
+        <input asp-for="TenLop" class="form-control" />
+        <span asp-validation-for="TenLop" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="NganhHoc" class="form-label"></label>
+        <input asp-for="NganhHoc" class="form-control" />
+        <span asp-validation-for="NganhHoc" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="KhoaHoc" class="form-label"></label>
+        <input asp-for="KhoaHoc" class="form-control" placeholder="Ví dụ: K67 (2022-2026)" />
+        <span asp-validation-for="KhoaHoc" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="MoTa" class="form-label"></label>
+        <textarea asp-for="MoTa" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="MoTa" class="text-danger"></span>
+    </div>
+    <div class="d-flex justify-content-end gap-2">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+        <button type="submit" class="btn btn-primary">Lưu</button>
+    </div>
+</form>

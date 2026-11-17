@@ -1,0 +1,47 @@
+@model LoginViewModel
+@{
+    ViewData["Title"] = "Đăng nhập";
+}
+
+<section class="login-page">
+    <div class="login-card">
+        <header class="login-card-header">
+            <div class="login-mark" aria-hidden="true">NgTus</div>
+            <h1>Đăng nhập</h1>
+            <p>Đăng nhập vào hệ thống quản lý DemoMVC</p>
+        </header>
+
+        @if (TempData["Success"] is string success)
+        {
+            <div class="alert alert-success" role="status">@success</div>
+        }
+
+        <form asp-action="Login" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+            <div asp-validation-summary="ModelOnly" class="login-validation-summary text-danger" role="alert"></div>
+            <div class="mb-3">
+                <label asp-for="Username" class="form-label"></label>
+                <input asp-for="Username" class="form-control" autocomplete="username" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label"></label>
+                <input asp-for="Password" class="form-control" autocomplete="current-password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-check mb-4">
+                <input asp-for="RememberMe" class="form-check-input" />
+                <label asp-for="RememberMe" class="form-check-label"></label>
+            </div>
+            <button type="submit" class="btn btn-primary login-submit">Đăng nhập</button>
+        </form>
+
+        <p class="text-center text-muted mt-4 mb-0">
+            Chưa có tài khoản?
+            <a asp-action="Register">Đăng ký</a>
+        </p>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

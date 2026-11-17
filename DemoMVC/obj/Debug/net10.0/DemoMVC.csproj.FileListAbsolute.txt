@@ -296,7 +296,6 @@ D:\HUMG\PTWWeb\NetcoreAPI\DemoMVC\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
 D:\HUMG\PTWWeb\NetcoreAPI\DemoMVC\obj\Debug\net10.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 D:\HUMG\PTWWeb\NetcoreAPI\DemoMVC\obj\Debug\net10.0\scopedcss\bundle\DemoMVC.styles.css
 D:\HUMG\PTWWeb\NetcoreAPI\DemoMVC\obj\Debug\net10.0\scopedcss\projectbundle\DemoMVC.bundle.scp.css
-D:\HUMG\PTWWeb\NetcoreAPI\DemoMVC\obj\Debug\net10.0\compressed\3xqpwvxjmo-{0}-b9sayid5wm-b9sayid5wm.gz
 D:\HUMG\PTWWeb\NetcoreAPI\DemoMVC\obj\Debug\net10.0\compressed\21pvhdo6kx-{0}-wp27tq62cr-wp27tq62cr.gz
 D:\HUMG\PTWWeb\NetcoreAPI\DemoMVC\obj\Debug\net10.0\compressed\wxksowlaa2-{0}-61n19gt1b8-61n19gt1b8.gz
 D:\HUMG\PTWWeb\NetcoreAPI\DemoMVC\obj\Debug\net10.0\compressed\ffshl3hb68-{0}-bqjiyaj88i-bqjiyaj88i.gz
@@ -372,3 +371,5 @@ D:\HUMG\PTWWeb\NetcoreAPI\DemoMVC\obj\Debug\net10.0\DemoMVC.pdb
 D:\HUMG\PTWWeb\NetcoreAPI\DemoMVC\obj\Debug\net10.0\DemoMVC.genruntimeconfig.cache
 D:\HUMG\PTWWeb\NetcoreAPI\DemoMVC\obj\Debug\net10.0\ref\DemoMVC.dll
 D:\HUMG\PTWWeb\NetcoreAPI\DemoMVC\obj\Debug\net10.0\compressed\i7pifeklos-{0}-iltgyyog2h-iltgyyog2h.gz
+D:\HUMG\PTWWeb\NetcoreAPI\DemoMVC\bin\Debug\net10.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\HUMG\PTWWeb\NetcoreAPI\DemoMVC\obj\Debug\net10.0\compressed\3xqpwvxjmo-{0}-hqukdbsplj-hqukdbsplj.gz

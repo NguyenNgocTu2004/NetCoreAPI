@@ -1,0 +1,59 @@
+@model DemoMVC.Models.StudentClass
+
+@{
+    var isDelete = ViewData["IsDelete"] as bool? == true;
+}
+
+<dl class="row">
+    <dt class="col-sm-3">Mã lớp</dt>
+    <dd class="col-sm-9">@Model.MaLop</dd>
+    <dt class="col-sm-3">Tên lớp</dt>
+    <dd class="col-sm-9">@Model.TenLop</dd>
+    <dt class="col-sm-3">Ngành học</dt>
+    <dd class="col-sm-9">@Model.NganhHoc</dd>
+    <dt class="col-sm-3">Khóa học</dt>
+    <dd class="col-sm-9">@Model.KhoaHoc</dd>
+    <dt class="col-sm-3">Mô tả</dt>
+    <dd class="col-sm-9">@Model.MoTa</dd>
+</dl>
+
+<h2 class="h5">Sinh viên trong lớp (@Model.Students.Count)</h2>
+@if (Model.Students.Count == 0)
+{
+    <p class="text-muted">Lớp hiện chưa có sinh viên.</p>
+}
+else
+{
+    <table class="table table-sm">
+        <thead><tr><th>Mã sinh viên</th><th>Họ tên</th><th>Email</th></tr></thead>
+        <tbody>
+            @foreach (var student in Model.Students.OrderBy(item => item.StudentCode))
+            {
+                <tr>
+                    <td>@student.StudentCode</td>
+                    <td>@student.FullName</td>
+                    <td>@student.Email</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@if (isDelete)
+{
+    <form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+        <input type="hidden" name="id" value="@Model.Id" />
+        <div class="d-flex justify-content-end gap-2">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+            <button type="submit" class="btn btn-danger">Xác nhận xóa</button>
+        </div>
+    </form>
+}
+else
+{
+    <div class="d-flex justify-content-end gap-2">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning"
+           data-crud-modal data-modal-title="Sửa lớp học">Sửa</a>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+    </div>
+}

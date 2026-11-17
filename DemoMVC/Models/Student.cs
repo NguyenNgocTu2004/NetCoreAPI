@@ -34,5 +34,23 @@ namespace DemoMVC.Models
             ErrorMessage = "Địa chỉ không được quá 200 ký tự")]
         [Display(Name = "Địa chỉ")]
         public string Address { get; set; } = string.Empty;
+
+        [EmailAddress(ErrorMessage = "Email không hợp lệ")]
+        [StringLength(254, ErrorMessage = "Email không được quá 254 ký tự")]
+        [Display(Name = "Email")]
+        public string? Email { get; set; }
+
+        [DataType(DataType.Date)]
+        [Display(Name = "Ngày sinh")]
+        public DateOnly? NgaySinh { get; set; }
+
+        [StringLength(20, ErrorMessage = "Giới tính không được quá 20 ký tự")]
+        [Display(Name = "Giới tính")]
+        public string? GioiTinh { get; set; }
+
+        [Display(Name = "Lớp")]
+        public int? ClassId { get; set; }
+
+        public StudentClass? Class { get; set; }
     }
 }

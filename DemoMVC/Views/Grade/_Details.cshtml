@@ -1,0 +1,39 @@
+@model DemoMVC.Models.Grade
+
+@{
+    var isDelete = ViewData["IsDelete"] as bool? == true;
+}
+
+<dl class="row">
+    <dt class="col-sm-4">Sinh viên</dt>
+    <dd class="col-sm-8">@Model.Student?.StudentCode - @Model.Student?.FullName</dd>
+    <dt class="col-sm-4">Môn học</dt>
+    <dd class="col-sm-8">@Model.Subject?.MaMonHoc - @Model.Subject?.TenMonHoc</dd>
+    <dt class="col-sm-4">Điểm quá trình</dt>
+    <dd class="col-sm-8">@Model.DiemQuaTrinh.ToString("0.00")</dd>
+    <dt class="col-sm-4">Điểm thi</dt>
+    <dd class="col-sm-8">@Model.DiemThi.ToString("0.00")</dd>
+    <dt class="col-sm-4">Điểm tổng kết</dt>
+    <dd class="col-sm-8">@Model.DiemTongKet.ToString("0.00")</dd>
+    <dt class="col-sm-4">Xếp loại</dt>
+    <dd class="col-sm-8">@Model.XepLoai</dd>
+</dl>
+
+@if (isDelete)
+{
+    <form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+        <input type="hidden" name="id" value="@Model.Id" />
+        <div class="d-flex justify-content-end gap-2">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+            <button type="submit" class="btn btn-danger">Xác nhận xóa</button>
+        </div>
+    </form>
+}
+else
+{
+    <div class="d-flex justify-content-end gap-2">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning"
+           data-crud-modal data-modal-title="Sửa điểm">Sửa</a>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+    </div>
+}

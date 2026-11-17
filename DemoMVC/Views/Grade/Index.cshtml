@@ -1,0 +1,43 @@
+@model IEnumerable<DemoMVC.Models.Grade>
+
+@{
+    ViewData["Title"] = "Quản lý điểm";
+    var currentFilter = ViewData["CurrentFilter"] as string;
+}
+
+<h1>Quản lý điểm</h1>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<form asp-action="Index" method="get" class="row g-2 mb-3">
+    <div class="col-lg-5">
+        <input name="searchString" value="@currentFilter" class="form-control"
+               placeholder="Mã/tên sinh viên hoặc môn học" />
+    </div>
+    <div class="col-lg-3">
+        <select name="classId" asp-items="ViewBag.ClassFilterOptions" class="form-select">
+            <option value="">Tất cả lớp</option>
+        </select>
+    </div>
+    <div class="col-lg-2">
+        <select name="subjectId" asp-items="ViewBag.SubjectFilterOptions" class="form-select">
+            <option value="">Tất cả môn học</option>
+        </select>
+    </div>
+    <div class="col-lg-2 d-flex gap-2">
+        <button type="submit" class="btn btn-primary flex-fill">Lọc</button>
+        <a asp-action="Index" class="btn btn-outline-secondary flex-fill">Xóa</a>
+    </div>
+</form>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary" data-crud-modal
+       data-modal-title="Thêm điểm">+ Thêm điểm</a>
+</p>
+
+<div data-list-url="@Url.Action("List")">
+    <partial name="_GradeTable" model="Model" />
+</div>

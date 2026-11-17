@@ -6,6 +6,8 @@
             <th>ID</th>
             <th>Mã sinh viên</th>
             <th>Họ tên</th>
+            <th>Email</th>
+            <th>Lớp</th>
             <th>Trường</th>
             <th>Địa chỉ</th>
             <th>Chức năng</th>
@@ -18,6 +20,8 @@
                 <td>@student.Id</td>
                 <td>@student.StudentCode</td>
                 <td>@student.FullName</td>
+                <td>@student.Email</td>
+                <td>@(student.Class?.TenLop ?? "Chưa xếp lớp")</td>
                 <td>@student.School</td>
                 <td>@student.Address</td>
                 <td class="text-nowrap">

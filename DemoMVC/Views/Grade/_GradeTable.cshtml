@@ -1,0 +1,40 @@
+@model IEnumerable<DemoMVC.Models.Grade>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Mã sinh viên</th>
+            <th>Sinh viên</th>
+            <th>Lớp</th>
+            <th>Môn học</th>
+            <th>Quá trình</th>
+            <th>Thi</th>
+            <th>Tổng kết</th>
+            <th>Xếp loại</th>
+            <th>Chức năng</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Student?.StudentCode</td>
+                <td>@item.Student?.FullName</td>
+                <td>@(item.Student?.Class?.TenLop ?? "Chưa xếp lớp")</td>
+                <td>@item.Subject?.TenMonHoc</td>
+                <td>@item.DiemQuaTrinh.ToString("0.00")</td>
+                <td>@item.DiemThi.ToString("0.00")</td>
+                <td>@item.DiemTongKet.ToString("0.00")</td>
+                <td>@item.XepLoai</td>
+                <td class="text-nowrap">
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm"
+                       data-crud-modal data-modal-title="Chi tiết điểm">Xem</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm"
+                       data-crud-modal data-modal-title="Sửa điểm">Sửa</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm"
+                       data-crud-modal data-modal-title="Xóa điểm">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -11,6 +11,14 @@
     <dd class="col-sm-9">@Model.StudentCode</dd>
     <dt class="col-sm-3">Họ tên</dt>
     <dd class="col-sm-9">@Model.FullName</dd>
+    <dt class="col-sm-3">Email</dt>
+    <dd class="col-sm-9">@Model.Email</dd>
+    <dt class="col-sm-3">Ngày sinh</dt>
+    <dd class="col-sm-9">@Model.NgaySinh?.ToString("dd/MM/yyyy")</dd>
+    <dt class="col-sm-3">Giới tính</dt>
+    <dd class="col-sm-9">@Model.GioiTinh</dd>
+    <dt class="col-sm-3">Lớp</dt>
+    <dd class="col-sm-9">@(Model.Class?.TenLop ?? "Chưa xếp lớp")</dd>
     <dt class="col-sm-3">Trường</dt>
     <dd class="col-sm-9">@Model.School</dd>
     <dt class="col-sm-3">Địa chỉ</dt>
@@ -30,6 +38,8 @@
 else
 {
     <div class="d-flex justify-content-end gap-2">
+        <a asp-controller="Grade" asp-action="ByStudent" asp-route-studentId="@Model.Id"
+           class="btn btn-success">Xem bảng điểm</a>
         <a asp-action="Edit"
            asp-route-id="@Model.Id"
            class="btn btn-warning"

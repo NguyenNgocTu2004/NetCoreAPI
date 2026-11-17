@@ -1,0 +1,49 @@
+@model DemoMVC.Models.Grade
+
+@{
+    var actionName = Model.Id == 0 ? "Create" : "Edit";
+}
+
+<form asp-action="@actionName" asp-route-id="@(Model.Id == 0 ? (int?)null : Model.Id)" method="post">
+    <input asp-for="Id" type="hidden" />
+    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+    <div class="mb-3">
+        <label asp-for="StudentId" class="form-label"></label>
+        <select asp-for="StudentId" asp-items="ViewBag.StudentOptions" class="form-select" required>
+            <option value="">-- Chọn sinh viên --</option>
+        </select>
+        <span asp-validation-for="StudentId" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="SubjectId" class="form-label"></label>
+        <select asp-for="SubjectId" asp-items="ViewBag.SubjectOptions" class="form-select" required>
+            <option value="">-- Chọn môn học --</option>
+        </select>
+        <span asp-validation-for="SubjectId" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="DiemQuaTrinh" class="form-label"></label>
+        <input asp-for="DiemQuaTrinh" type="number" min="0" max="10" step="0.01" class="form-control" />
+        <span asp-validation-for="DiemQuaTrinh" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="DiemThi" class="form-label"></label>
+        <input asp-for="DiemThi" type="number" min="0" max="10" step="0.01" class="form-control" />
+        <span asp-validation-for="DiemThi" class="text-danger"></span>
+    </div>
+    <div class="alert alert-info mb-3">
+        Điểm tổng kết được tính tự động: điểm quá trình × 40% + điểm thi × 60%,
+        làm tròn 2 chữ số thập phân.
+        @if (Model.Id != 0)
+        {
+            <div class="mt-2">
+                Kết quả hiện tại: <strong>@Model.DiemTongKet.ToString("0.00")</strong>
+                — <strong>@Model.XepLoai</strong>
+            </div>
+        }
+    </div>
+    <div class="d-flex justify-content-end gap-2">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+        <button type="submit" class="btn btn-primary">Lưu</button>
+    </div>
+</form>

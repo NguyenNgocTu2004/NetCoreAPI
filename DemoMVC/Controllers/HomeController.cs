@@ -1,14 +1,30 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using DemoMVC.Data;
 using DemoMVC.Models;
+using DemoMVC.ViewModels;
 
 namespace DemoMVC.Controllers;
 
 public class HomeController : Controller
 {
-    public IActionResult Index()
+    private readonly ApplicationDbContext _context;
+
+    public HomeController(ApplicationDbContext context)
     {
-        return View();
+        _context = context;
+    }
+
+    public async Task<IActionResult> Index()
+    {
+        return View(new DashboardViewModel
+        {
+            StudentCount = await _context.Students.CountAsync(),
+            ClassCount = await _context.Classes.CountAsync(),
+            SubjectCount = await _context.Subjects.CountAsync(),
+            GradeCount = await _context.Grades.CountAsync()
+        });
     }
 
     public IActionResult Privacy()

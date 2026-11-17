@@ -31,8 +31,88 @@ build_property._RazorSourceGeneratorDebug =
 build_property.EffectiveAnalysisLevelStyle = 10.0
 build_property.EnableCodeStyleSeverity = 
 
+[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Account/AccessDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxBY2Nlc3NEZW5pZWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Class/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3NcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Class/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3NcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Class/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3NcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Class/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3NcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Class/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3NcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Class/_ClassTable.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3NcX0NsYXNzVGFibGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Class/_Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3NcX0RldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Class/_Form.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3NcX0Zvcm0uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Demo/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVtb1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Grade/ByStudent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3JhZGVcQnlTdHVkZW50LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Grade/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3JhZGVcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Grade/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3JhZGVcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Grade/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3JhZGVcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Grade/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3JhZGVcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Grade/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3JhZGVcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Grade/_Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3JhZGVcX0RldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Grade/_Form.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3JhZGVcX0Zvcm0uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Grade/_GradeTable.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3JhZGVcX0dyYWRlVGFibGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Home/Index.cshtml]
@@ -41,38 +121,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/NhanVien/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmhhblZpZW5cQ3JlYXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/NhanVien/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmhhblZpZW5cRGVsZXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/NhanVien/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmhhblZpZW5cRGV0YWlscy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/NhanVien/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmhhblZpZW5cRWRpdC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/NhanVien/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmhhblZpZW5cSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/NhanVien/_Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmhhblZpZW5cX0RldGFpbHMuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/NhanVien/_Form.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmhhblZpZW5cX0Zvcm0uY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/NhanVien/_NhanVienTable.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmhhblZpZW5cX05oYW5WaWVuVGFibGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Shared/Error.cshtml]
@@ -113,6 +161,46 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Student/_StudentTable.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxfU3R1ZGVudFRhYmxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Subject/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViamVjdFxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Subject/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViamVjdFxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Subject/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViamVjdFxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Subject/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViamVjdFxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Subject/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViamVjdFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Subject/_Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViamVjdFxfRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Subject/_Form.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViamVjdFxfRm9ybS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Subject/_SubjectTable.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViamVjdFxfU3ViamVjdFRhYmxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Users/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/Users/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/HUMG/PTWWeb/NetcoreAPI/DemoMVC/Views/_ViewImports.cshtml]

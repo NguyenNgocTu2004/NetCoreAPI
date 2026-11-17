@@ -1,0 +1,30 @@
+@model IEnumerable<DemoMVC.Models.Subject>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Mã môn học</th>
+            <th>Tên môn học</th>
+            <th>Số tín chỉ</th>
+            <th>Chức năng</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.MaMonHoc</td>
+                <td>@item.TenMonHoc</td>
+                <td>@item.SoTinChi</td>
+                <td class="text-nowrap">
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm"
+                       data-crud-modal data-modal-title="Chi tiết môn học">Xem</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm"
+                       data-crud-modal data-modal-title="Sửa môn học">Sửa</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm"
+                       data-crud-modal data-modal-title="Xóa môn học">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

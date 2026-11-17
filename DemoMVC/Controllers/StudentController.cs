@@ -1,10 +1,13 @@
 using DemoMVC.Data;
 using DemoMVC.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace DemoMVC.Controllers
 {
+    [Authorize(Roles = IdentitySeeder.AdminRole + "," + IdentitySeeder.DepartmentRole)]
     public class StudentController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -50,6 +53,7 @@ namespace DemoMVC.Controllers
             }
 
             var student = await _context.Students
+                .Include(s => s.Class)
                 .FirstOrDefaultAsync(s => s.Id == id);
 
             if (student == null)
@@ -66,9 +70,10 @@ namespace DemoMVC.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            PopulateClassSelectList();
             return IsAjaxRequest()
                 ? PartialView("_Form", new Student())
-                : View();
+                : View(new Student());
         }
 
 
@@ -76,9 +81,11 @@ namespace DemoMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Student student)
         {
+            await ValidateClassAsync(student.ClassId, required: true);
             if (ModelState.IsValid)
             {
                 student.StudentCode = student.StudentCode?.Trim() ?? string.Empty;
+                student.Email = student.Email?.Trim();
 
                 var studentCodeExists = await _context.Students
                     .AnyAsync(s => s.StudentCode == student.StudentCode);
@@ -122,6 +129,7 @@ namespace DemoMVC.Controllers
                 return NotFound();
             }
 
+            PopulateClassSelectList(student.ClassId);
             return IsAjaxRequest()
                 ? PartialView("_Form", student)
                 : View(student);
@@ -136,6 +144,7 @@ namespace DemoMVC.Controllers
                 return NotFound();
             }
 
+            await ValidateClassAsync(student.ClassId, required: false);
             if (ModelState.IsValid)
             {
                 student.StudentCode = student.StudentCode?.Trim() ?? string.Empty;
@@ -159,6 +168,10 @@ namespace DemoMVC.Controllers
                 existingStudent.FullName = student.FullName;
                 existingStudent.School = student.School;
                 existingStudent.Address = student.Address;
+                existingStudent.Email = student.Email?.Trim();
+                existingStudent.NgaySinh = student.NgaySinh;
+                existingStudent.GioiTinh = student.GioiTinh;
+                existingStudent.ClassId = student.ClassId;
 
                 await _context.SaveChangesAsync();
 
@@ -176,7 +189,6 @@ namespace DemoMVC.Controllers
         }
 
         [HttpGet]
-        [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -185,6 +197,7 @@ namespace DemoMVC.Controllers
             }
 
             var student = await _context.Students
+                .Include(s => s.Class)
                 .FirstOrDefaultAsync(s => s.Id == id);
 
             if (student == null)
@@ -208,6 +221,18 @@ namespace DemoMVC.Controllers
                 return NotFound();
             }
 
+            if (await _context.Grades.AnyAsync(grade => grade.StudentId == id))
+            {
+                const string message = "Không thể xóa sinh viên đang có dữ liệu điểm.";
+                if (IsAjaxRequest())
+                {
+                    return Conflict(new { message });
+                }
+
+                TempData["Error"] = message;
+                return RedirectToAction(nameof(Index));
+            }
+
             _context.Students.Remove(student);
             await _context.SaveChangesAsync();
 
@@ -223,7 +248,9 @@ namespace DemoMVC.Controllers
 
         private IQueryable<Student> GetStudents(string? searchString)
         {
-            var studentsQuery = _context.Students.AsQueryable();
+            var studentsQuery = _context.Students
+                .Include(s => s.Class)
+                .AsQueryable();
             if (string.IsNullOrWhiteSpace(searchString))
             {
                 return studentsQuery;
@@ -233,8 +260,37 @@ namespace DemoMVC.Controllers
             return studentsQuery.Where(s =>
                 s.StudentCode.Contains(keyword) ||
                 s.FullName.Contains(keyword) ||
+                (s.Email != null && s.Email.Contains(keyword)) ||
                 s.School.Contains(keyword) ||
-                s.Address.Contains(keyword));
+                s.Address.Contains(keyword) ||
+                (s.Class != null && s.Class.TenLop.Contains(keyword)));
+        }
+
+        private void PopulateClassSelectList(int? selectedClassId = null)
+        {
+            ViewData["ClassId"] = new SelectList(
+                _context.Classes.OrderBy(studentClass => studentClass.TenLop),
+                nameof(StudentClass.Id),
+                nameof(StudentClass.TenLop),
+                selectedClassId);
+        }
+
+        private async Task ValidateClassAsync(int? classId, bool required)
+        {
+            if (!classId.HasValue)
+            {
+                if (required)
+                {
+                    ModelState.AddModelError(nameof(Student.ClassId), "Vui lòng chọn lớp.");
+                }
+
+                return;
+            }
+
+            if (!await _context.Classes.AnyAsync(studentClass => studentClass.Id == classId.Value))
+            {
+                ModelState.AddModelError(nameof(Student.ClassId), "Lớp đã chọn không tồn tại.");
+            }
         }
 
         private bool IsAjaxRequest()
@@ -244,6 +300,7 @@ namespace DemoMVC.Controllers
 
         private IActionResult InvalidStudentForm(Student student)
         {
+            PopulateClassSelectList(student.ClassId);
             if (IsAjaxRequest())
             {
                 Response.StatusCode = StatusCodes.Status422UnprocessableEntity;

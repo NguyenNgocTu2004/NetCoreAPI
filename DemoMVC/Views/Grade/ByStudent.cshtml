@@ -1,0 +1,51 @@
+@model DemoMVC.ViewModels.StudentGradesViewModel
+
+@{
+    ViewData["Title"] = "Bảng điểm sinh viên";
+}
+
+<h1>Bảng điểm sinh viên</h1>
+<div class="card mb-3">
+    <div class="card-body">
+        <h2 class="h5">@Model.Student.FullName</h2>
+        <div>Mã sinh viên: @Model.Student.StudentCode</div>
+        <div>Lớp: @(Model.Student.Class?.TenLop ?? "Chưa xếp lớp")</div>
+    </div>
+</div>
+
+@if (Model.Grades.Count == 0)
+{
+    <p class="text-muted">Sinh viên chưa có điểm.</p>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Mã môn học</th>
+                <th>Môn học</th>
+                <th>Tín chỉ</th>
+                <th>Quá trình</th>
+                <th>Thi</th>
+                <th>Tổng kết</th>
+                <th>Xếp loại</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var grade in Model.Grades)
+            {
+                <tr>
+                    <td>@grade.Subject?.MaMonHoc</td>
+                    <td>@grade.Subject?.TenMonHoc</td>
+                    <td>@grade.Subject?.SoTinChi</td>
+                    <td>@grade.DiemQuaTrinh.ToString("0.00")</td>
+                    <td>@grade.DiemThi.ToString("0.00")</td>
+                    <td>@grade.DiemTongKet.ToString("0.00")</td>
+                    <td>@grade.XepLoai</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<a asp-controller="Student" asp-action="Index" class="btn btn-outline-secondary">Quay lại sinh viên</a>

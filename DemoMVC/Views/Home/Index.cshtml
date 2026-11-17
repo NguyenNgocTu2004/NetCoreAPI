@@ -1,4 +1,6 @@
-﻿@{
+﻿@model DemoMVC.ViewModels.DashboardViewModel
+
+@{
     ViewData["Title"] = "Trang chủ";
 }
 
@@ -88,7 +90,7 @@
 
     .stats {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         gap: 20px;
     }
 
@@ -181,10 +183,6 @@
         background: #dbeafe;
     }
 
-    .employee-icon {
-        background: #fce7f3;
-    }
-
     .quick-card h4 {
         margin: 0 0 5px;
         font-weight: 700;
@@ -257,12 +255,9 @@
            class="hero-button">
             🎓 Quản lý sinh viên
         </a>
-         <a asp-controller="NhanVien"
-         style="margin-left: 10px;"
-           asp-action="Index"
-           class="hero-button">
-            👨‍💼 Quản lý nhân viên
-        </a>
+         <a asp-controller="Class" asp-action="Index" class="hero-button" style="margin-left: 10px;">
+             🏫 Quản lý lớp học
+         </a>
 
     </div>
 
@@ -278,9 +273,9 @@
                 🎓
             </div>
 
-            <h3>Student</h3>
+            <h3>@Model.StudentCount</h3>
 
-            <p>Quản lý thông tin sinh viên</p>
+            <p>Sinh viên</p>
 
         </div>
 
@@ -288,12 +283,12 @@
         <div class="stat-card">
 
             <div class="stat-icon green">
-                👨‍💼
+                🏫
             </div>
 
-            <h3>Nhân viên</h3>
+            <h3>@Model.ClassCount</h3>
 
-            <p>Quản lý thông tin nhân viên</p>
+            <p>Lớp học</p>
 
         </div>
 
@@ -301,13 +296,19 @@
         <div class="stat-card">
 
             <div class="stat-icon orange">
-                🗄️
+                📚
             </div>
 
-            <h3>SQLite</h3>
+            <h3>@Model.SubjectCount</h3>
 
-            <p>Lưu trữ dữ liệu hệ thống</p>
+            <p>Môn học</p>
 
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon blue">📝</div>
+            <h3>@Model.GradeCount</h3>
+            <p>Bản ghi điểm</p>
         </div>
 
     </div>
@@ -337,22 +338,36 @@
         </a>
 
 
-        <a asp-controller="NhanVien"
-           asp-action="Index"
-           class="quick-card">
+        <a asp-controller="Class" asp-action="Index" class="quick-card">
 
-            <div class="quick-icon employee-icon">
-                👨‍💼
+            <div class="quick-icon" style="background:#dcfce7;">
+                🏫
             </div>
 
             <div>
-                <h4>Quản lý nhân viên</h4>
+                <h4>Quản lý lớp học</h4>
 
                 <p>
-                    Quản lý thông tin nhân viên trong hệ thống.
+                    Quản lý lớp học và danh sách sinh viên.
                 </p>
             </div>
 
+        </a>
+
+        <a asp-controller="Subject" asp-action="Index" class="quick-card">
+            <div class="quick-icon" style="background:#ffedd5;">📚</div>
+            <div>
+                <h4>Quản lý môn học</h4>
+                <p>Quản lý mã môn học, tên môn và số tín chỉ.</p>
+            </div>
+        </a>
+
+        <a asp-controller="Grade" asp-action="Index" class="quick-card">
+            <div class="quick-icon" style="background:#ede9fe;">📝</div>
+            <div>
+                <h4>Quản lý điểm</h4>
+                <p>Nhập điểm và xem kết quả học tập.</p>
+            </div>
         </a>
 
     </div>

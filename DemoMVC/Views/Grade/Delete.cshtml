@@ -1,0 +1,10 @@
+@model DemoMVC.Models.Grade
+
+@{
+    ViewData["Title"] = "Xóa điểm";
+    ViewData["IsDelete"] = true;
+}
+
+<h1>Xóa điểm</h1>
+<div class="alert alert-warning">Bạn có chắc chắn muốn xóa bản ghi điểm này không?</div>
+<partial name="_Details" model="Model" />

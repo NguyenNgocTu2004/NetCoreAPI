@@ -1,0 +1,10 @@
+@model DemoMVC.Models.Subject
+
+@{
+    ViewData["Title"] = "Xóa môn học";
+    ViewData["IsDelete"] = true;
+}
+
+<h1>Xóa môn học</h1>
+<div class="alert alert-warning">Bạn có chắc chắn muốn xóa môn học này không?</div>
+<partial name="_Details" model="Model" />

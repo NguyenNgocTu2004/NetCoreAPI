@@ -44,6 +44,10 @@
                 @Model.FullName
             </dd>
 
+            <dt class="col-sm-3">Email</dt>
+            <dd class="col-sm-9">@Model.Email</dd>
+            <dt class="col-sm-3">Lớp</dt>
+            <dd class="col-sm-9">@(Model.Class?.TenLop ?? "Chưa xếp lớp")</dd>
 
             <!-- Trường -->
             <dt class="col-sm-3">
@@ -53,7 +57,6 @@
             <dd class="col-sm-9">
                 @Model.School
             </dd>
-
 
             <!-- Địa chỉ -->
             <dt class="col-sm-3">
