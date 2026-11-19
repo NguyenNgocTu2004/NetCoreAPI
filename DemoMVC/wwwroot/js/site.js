@@ -61,6 +61,12 @@
             url.searchParams.set("searchString", searchInput.value.trim());
         }
 
+        document.querySelectorAll('select[name="classId"], select[name="subjectId"]').forEach((select) => {
+            if (select.value) {
+                url.searchParams.set(select.name, select.value);
+            }
+        });
+
         const response = await fetch(url, {
             headers: { "X-Requested-With": "XMLHttpRequest" }
         });

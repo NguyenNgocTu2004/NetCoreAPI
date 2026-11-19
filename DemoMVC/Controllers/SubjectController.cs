@@ -3,6 +3,7 @@ using DemoMVC.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using DemoMVC.ViewModels;
 
 namespace DemoMVC.Controllers
 {
@@ -16,25 +17,25 @@ namespace DemoMVC.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(string? searchString)
+        public async Task<IActionResult> Index(string? searchString, int page = 1)
         {
-            var subjects = await GetSubjects(searchString)
-                .OrderBy(subject => subject.MaMonHoc)
-                .ToListAsync();
+            var pagedSubjects = await PagedResult<Subject>.CreateAsync(
+                GetSubjects(searchString).OrderBy(subject => subject.MaMonHoc),
+                page);
 
             ViewData["CurrentFilter"] = searchString;
             return IsAjaxRequest()
-                ? PartialView("_SubjectTable", subjects)
-                : View(subjects);
+                ? PartialView("_SubjectTable", pagedSubjects)
+                : View(pagedSubjects);
         }
 
         [HttpGet]
-        public async Task<IActionResult> List(string? searchString)
+        public async Task<IActionResult> List(string? searchString, int page = 1)
         {
-            var subjects = await GetSubjects(searchString)
-                .OrderBy(subject => subject.MaMonHoc)
-                .ToListAsync();
-            return PartialView("_SubjectTable", subjects);
+            var pagedSubjects = await PagedResult<Subject>.CreateAsync(
+                GetSubjects(searchString).OrderBy(subject => subject.MaMonHoc),
+                page);
+            return PartialView("_SubjectTable", pagedSubjects);
         }
 
         [HttpGet]

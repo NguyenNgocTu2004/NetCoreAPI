@@ -3,6 +3,7 @@ using DemoMVC.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using DemoMVC.ViewModels;
 
 namespace DemoMVC.Controllers
 {
@@ -16,25 +17,25 @@ namespace DemoMVC.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(string? searchString)
+        public async Task<IActionResult> Index(string? searchString, int page = 1)
         {
-            var classes = await GetClasses(searchString)
-                .OrderBy(studentClass => studentClass.MaLop)
-                .ToListAsync();
+            var pagedClasses = await PagedResult<StudentClass>.CreateAsync(
+                GetClasses(searchString).OrderBy(studentClass => studentClass.MaLop),
+                page);
 
             ViewData["CurrentFilter"] = searchString;
             return IsAjaxRequest()
-                ? PartialView("_ClassTable", classes)
-                : View(classes);
+                ? PartialView("_ClassTable", pagedClasses)
+                : View(pagedClasses);
         }
 
         [HttpGet]
-        public async Task<IActionResult> List(string? searchString)
+        public async Task<IActionResult> List(string? searchString, int page = 1)
         {
-            var classes = await GetClasses(searchString)
-                .OrderBy(studentClass => studentClass.MaLop)
-                .ToListAsync();
-            return PartialView("_ClassTable", classes);
+            var pagedClasses = await PagedResult<StudentClass>.CreateAsync(
+                GetClasses(searchString).OrderBy(studentClass => studentClass.MaLop),
+                page);
+            return PartialView("_ClassTable", pagedClasses);
         }
 
         [HttpGet]

@@ -370,6 +370,6 @@ D:\HUMG\PTWWeb\NetcoreAPI\DemoMVC\obj\Debug\net10.0\refint\DemoMVC.dll
 D:\HUMG\PTWWeb\NetcoreAPI\DemoMVC\obj\Debug\net10.0\DemoMVC.pdb
 D:\HUMG\PTWWeb\NetcoreAPI\DemoMVC\obj\Debug\net10.0\DemoMVC.genruntimeconfig.cache
 D:\HUMG\PTWWeb\NetcoreAPI\DemoMVC\obj\Debug\net10.0\ref\DemoMVC.dll
-D:\HUMG\PTWWeb\NetcoreAPI\DemoMVC\obj\Debug\net10.0\compressed\i7pifeklos-{0}-iltgyyog2h-iltgyyog2h.gz
 D:\HUMG\PTWWeb\NetcoreAPI\DemoMVC\bin\Debug\net10.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 D:\HUMG\PTWWeb\NetcoreAPI\DemoMVC\obj\Debug\net10.0\compressed\3xqpwvxjmo-{0}-hqukdbsplj-hqukdbsplj.gz
+D:\HUMG\PTWWeb\NetcoreAPI\DemoMVC\obj\Debug\net10.0\compressed\i7pifeklos-{0}-ozjag8ur0h-ozjag8ur0h.gz

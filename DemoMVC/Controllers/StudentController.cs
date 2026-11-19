@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using DemoMVC.ViewModels;
 
 namespace DemoMVC.Controllers
 {
@@ -17,31 +18,31 @@ namespace DemoMVC.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(string? searchString)
+        public async Task<IActionResult> Index(string? searchString, int? classId, int page = 1)
         {
-            var studentsQuery = GetStudents(searchString);
-
-            var students = await studentsQuery
-                .OrderBy(s => s.Id)
-                .ToListAsync();
+            var studentsQuery = GetStudents(searchString, classId)
+                .OrderBy(s => s.Id);
+            var pagedStudents = await PagedResult<Student>.CreateAsync(studentsQuery, page);
 
             ViewData["CurrentFilter"] = searchString;
+            ViewData["SelectedClassId"] = classId;
+            PopulateClassFilter(classId);
             if (IsAjaxRequest())
             {
-                return PartialView("_StudentTable", students);
+                return PartialView("_StudentTable", pagedStudents);
             }
 
-            return View(students);
+            return View(pagedStudents);
         }
 
         [HttpGet]
-        public async Task<IActionResult> List(string? searchString)
+        public async Task<IActionResult> List(string? searchString, int? classId, int page = 1)
         {
-            var students = await GetStudents(searchString)
-                .OrderBy(s => s.Id)
-                .ToListAsync();
+            var pagedStudents = await PagedResult<Student>.CreateAsync(
+                GetStudents(searchString, classId).OrderBy(s => s.Id),
+                page);
 
-            return PartialView("_StudentTable", students);
+            return PartialView("_StudentTable", pagedStudents);
         }
 
         [HttpGet]
@@ -252,30 +253,44 @@ namespace DemoMVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private IQueryable<Student> GetStudents(string? searchString)
+        private IQueryable<Student> GetStudents(string? searchString, int? classId = null)
         {
             var studentsQuery = _context.Students
                 .Include(s => s.Class)
                 .AsQueryable();
-            if (string.IsNullOrWhiteSpace(searchString))
+            if (classId.HasValue)
             {
-                return studentsQuery;
+                studentsQuery = studentsQuery.Where(s => s.ClassId == classId.Value);
             }
 
-            var keyword = searchString.Trim();
-            return studentsQuery.Where(s =>
-                s.StudentCode.Contains(keyword) ||
-                s.FullName.Contains(keyword) ||
-                (s.Email != null && s.Email.Contains(keyword)) ||
-                s.School.Contains(keyword) ||
-                s.Address.Contains(keyword) ||
-                (s.Class != null && s.Class.TenLop.Contains(keyword)));
+            if (!string.IsNullOrWhiteSpace(searchString))
+            {
+                var keyword = searchString.Trim();
+                studentsQuery = studentsQuery.Where(s =>
+                    s.StudentCode.Contains(keyword) ||
+                    s.FullName.Contains(keyword) ||
+                    (s.Email != null && s.Email.Contains(keyword)) ||
+                    s.School.Contains(keyword) ||
+                    s.Address.Contains(keyword) ||
+                    (s.Class != null && s.Class.TenLop.Contains(keyword)));
+            }
+
+            return studentsQuery;
         }
 
         private void PopulateClassSelectList(int? selectedClassId = null)
         {
             ViewData["ClassId"] = new SelectList(
                 _context.Classes.OrderBy(studentClass => studentClass.TenLop),
+                nameof(StudentClass.Id),
+                nameof(StudentClass.TenLop),
+                selectedClassId);
+        }
+
+        private void PopulateClassFilter(int? selectedClassId)
+        {
+            ViewData["ClassFilterOptions"] = new SelectList(
+                _context.Classes.OrderBy(studentClass => studentClass.MaLop),
                 nameof(StudentClass.Id),
                 nameof(StudentClass.TenLop),
                 selectedClassId);

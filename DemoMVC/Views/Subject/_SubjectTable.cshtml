@@ -1,4 +1,4 @@
-@model IEnumerable<DemoMVC.Models.Subject>
+@model DemoMVC.ViewModels.PagedResult<DemoMVC.Models.Subject>
 @{
     var canManageData = User.IsInRole(IdentitySeeder.AdminRole) || User.IsInRole(IdentitySeeder.DepartmentRole);
 }
@@ -13,7 +13,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Items)
         {
             <tr>
                 <td>@item.MaMonHoc</td>
@@ -32,5 +32,16 @@
                 </td>
             </tr>
         }
+        @if (Model.Items.Count == 0)
+        {
+            <tr><td colspan="4" class="py-4 text-center text-muted">Không có môn học phù hợp.</td></tr>
+        }
     </tbody>
 </table>
+<partial name="_Pagination" model='new DemoMVC.ViewModels.PaginationViewModel {
+    CurrentPage = Model.CurrentPage, TotalPages = Model.TotalPages,
+    TotalItems = Model.TotalItems, PageSize = Model.PageSize,
+    FirstItem = Model.FirstItem, LastItem = Model.LastItem,
+    Action = "Index",
+    SearchString = ViewContext.HttpContext.Request.Query["searchString"]
+}' />

@@ -3,6 +3,19 @@
 @{
     ViewData["Title"] = "Bảng điểm sinh viên";
 }
+@if (Model.PagedGrades != null)
+{
+    <partial name="_Pagination" model='new DemoMVC.ViewModels.PaginationViewModel {
+        CurrentPage = Model.PagedGrades.CurrentPage,
+        TotalPages = Model.PagedGrades.TotalPages,
+        TotalItems = Model.PagedGrades.TotalItems,
+        PageSize = Model.PagedGrades.PageSize,
+        FirstItem = Model.PagedGrades.FirstItem,
+        LastItem = Model.PagedGrades.LastItem,
+        Action = "ByStudent",
+        RouteValues = new Dictionary<string, object?> { ["studentId"] = Model.Student.Id }
+    }' />
+}
 
 <h1>Bảng điểm sinh viên</h1>
 <div class="card mb-3">

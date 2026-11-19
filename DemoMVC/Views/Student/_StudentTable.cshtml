@@ -1,4 +1,4 @@
-@model IEnumerable<DemoMVC.Models.Student>
+@model DemoMVC.ViewModels.PagedResult<DemoMVC.Models.Student>
 @{
     var canManageData = User.IsInRole(IdentitySeeder.AdminRole) || User.IsInRole(IdentitySeeder.DepartmentRole);
 }
@@ -17,7 +17,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var student in Model)
+        @foreach (var student in Model.Items)
         {
             <tr>
                 <td>@student.Id</td>
@@ -55,5 +55,24 @@
                 </td>
             </tr>
         }
+        @if (Model.Items.Count == 0)
+        {
+            <tr>
+                <td colspan="8" class="py-4 text-center text-muted">Không có sinh viên phù hợp.</td>
+            </tr>
+        }
     </tbody>
 </table>
+<partial name="_Pagination" model='new DemoMVC.ViewModels.PaginationViewModel {
+    CurrentPage = Model.CurrentPage,
+    TotalPages = Model.TotalPages,
+    TotalItems = Model.TotalItems,
+    PageSize = Model.PageSize,
+    FirstItem = Model.FirstItem,
+    LastItem = Model.LastItem,
+    Action = "Index",
+    SearchString = ViewContext.HttpContext.Request.Query["searchString"],
+    RouteValues = new Dictionary<string, object?> {
+        ["classId"] = ViewContext.HttpContext.Request.Query["classId"].ToString()
+    }
+}' />

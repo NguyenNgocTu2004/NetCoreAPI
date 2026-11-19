@@ -1,8 +1,9 @@
-@model IEnumerable<DemoMVC.Models.Student>
+@model DemoMVC.ViewModels.PagedResult<DemoMVC.Models.Student>
 
 @{
     ViewData["Title"] = "Bảng dữ liệu sinh viên";
     var currentFilter = ViewData["CurrentFilter"] as string;
+    var classId = ViewData["SelectedClassId"] as int?;
 }
 
 <h1>Bảng dữ liệu sinh viên</h1>
@@ -22,12 +23,17 @@
 }
 
 <form asp-action="Index" method="get" class="row g-2 mb-3">
-    <div class="col-md-8">
+    <div class="col-md-5">
         <input type="text"
                name="searchString"
                value="@currentFilter"
                class="form-control"
                placeholder="Tìm theo mã, họ tên, email, lớp, trường hoặc địa chỉ" />
+    </div>
+    <div class="col-md-3">
+        <select name="classId" asp-items="ViewBag.ClassFilterOptions" class="form-select">
+            <option value="">Tất cả lớp</option>
+        </select>
     </div>
     <div class="col-md-4 d-flex gap-2">
         <button type="submit" class="btn btn-primary flex-fill">

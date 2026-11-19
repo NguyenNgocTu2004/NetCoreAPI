@@ -26,12 +26,14 @@ namespace DemoMVC.Controllers
         public async Task<IActionResult> Index(
             string? searchString,
             int? classId,
-            int? subjectId)
+            int? subjectId,
+            int page = 1)
         {
-            var grades = await GetGrades(searchString, classId, subjectId)
-                .OrderBy(grade => grade.Student!.StudentCode)
-                .ThenBy(grade => grade.Subject!.MaMonHoc)
-                .ToListAsync();
+            var pagedGrades = await PagedResult<Grade>.CreateAsync(
+                GetGrades(searchString, classId, subjectId)
+                    .OrderBy(grade => grade.Student!.StudentCode)
+                    .ThenBy(grade => grade.Subject!.MaMonHoc),
+                page);
 
             ViewData["CurrentFilter"] = searchString;
             ViewData["SelectedClassId"] = classId;
@@ -39,21 +41,23 @@ namespace DemoMVC.Controllers
             PopulateGradeFilters(classId, subjectId);
 
             return IsAjaxRequest()
-                ? PartialView("_GradeTable", grades)
-                : View(grades);
+                ? PartialView("_GradeTable", pagedGrades)
+                : View(pagedGrades);
         }
 
         [HttpGet]
         public async Task<IActionResult> List(
             string? searchString,
             int? classId,
-            int? subjectId)
+            int? subjectId,
+            int page = 1)
         {
-            var grades = await GetGrades(searchString, classId, subjectId)
-                .OrderBy(grade => grade.Student!.StudentCode)
-                .ThenBy(grade => grade.Subject!.MaMonHoc)
-                .ToListAsync();
-            return PartialView("_GradeTable", grades);
+            var pagedGrades = await PagedResult<Grade>.CreateAsync(
+                GetGrades(searchString, classId, subjectId)
+                    .OrderBy(grade => grade.Student!.StudentCode)
+                    .ThenBy(grade => grade.Subject!.MaMonHoc),
+                page);
+            return PartialView("_GradeTable", pagedGrades);
         }
 
         [HttpGet]
@@ -216,7 +220,7 @@ namespace DemoMVC.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ByStudent(int studentId)
+        public async Task<IActionResult> ByStudent(int studentId, int page = 1)
         {
             var student = await _context.Students
                 .Include(item => item.Class)
@@ -226,16 +230,18 @@ namespace DemoMVC.Controllers
                 return NotFound();
             }
 
-            var grades = await _context.Grades
-                .Include(grade => grade.Subject)
-                .Where(grade => grade.StudentId == studentId)
-                .OrderBy(grade => grade.Subject!.MaMonHoc)
-                .ToListAsync();
+            var pagedGrades = await PagedResult<Grade>.CreateAsync(
+                _context.Grades
+                    .Include(grade => grade.Subject)
+                    .Where(grade => grade.StudentId == studentId)
+                    .OrderBy(grade => grade.Subject!.MaMonHoc),
+                page);
 
             return View(new StudentGradesViewModel
             {
                 Student = student,
-                Grades = grades
+                Grades = pagedGrades.Items,
+                PagedGrades = pagedGrades
             });
         }
 

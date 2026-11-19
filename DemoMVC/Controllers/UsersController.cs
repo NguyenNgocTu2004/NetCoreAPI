@@ -21,7 +21,11 @@ public class UsersController : Controller
         _context = context;
     }
 
-    public async Task<IActionResult> Index(string? searchString, string? roleFilter)
+    public async Task<IActionResult> Index(
+        string? searchString,
+        string? roleFilter,
+        string? statusFilter,
+        int page = 1)
     {
         var supportedRoles = new[]
         {
@@ -35,7 +39,13 @@ public class UsersController : Controller
             return BadRequest();
         }
 
-        var usersQuery = _userManager.Users.AsNoTracking();
+        if (!string.IsNullOrWhiteSpace(statusFilter) &&
+            statusFilter != "active" && statusFilter != "locked")
+        {
+            return BadRequest();
+        }
+
+        var usersQuery = _context.Users.AsNoTracking();
         if (!string.IsNullOrWhiteSpace(searchString))
         {
             var search = searchString.Trim();
@@ -44,21 +54,47 @@ public class UsersController : Controller
                 (user.Email != null && user.Email.Contains(search)));
         }
 
-        var users = await usersQuery
-            .OrderBy(user => user.UserName)
-            .ToListAsync();
-        var currentUserId = _userManager.GetUserId(User);
-        var managedUsers = new List<ManagedUserViewModel>(users.Count);
+        if (!string.IsNullOrWhiteSpace(roleFilter))
+        {
+            usersQuery = from user in usersQuery
+                        join userRole in _context.UserRoles on user.Id equals userRole.UserId
+                        join role in _context.Roles on userRole.RoleId equals role.Id
+                        where role.Name == roleFilter
+                        select user;
+        }
 
-        foreach (var user in users)
+        if (statusFilter == "active")
+        {
+            usersQuery = usersQuery.Where(user =>
+                !user.LockoutEnd.HasValue || user.LockoutEnd.Value <= DateTimeOffset.UtcNow);
+        }
+        else if (statusFilter == "locked")
+        {
+            usersQuery = usersQuery.Where(user =>
+                user.LockoutEnd.HasValue && user.LockoutEnd.Value > DateTimeOffset.UtcNow);
+        }
+
+        var adminIds = _context.UserRoles
+            .Where(userRole => _context.Roles
+                .Any(role => role.Id == userRole.RoleId && role.Name == IdentitySeeder.AdminRole))
+            .Select(userRole => userRole.UserId);
+        var departmentIds = _context.UserRoles
+            .Where(userRole => _context.Roles
+                .Any(role => role.Id == userRole.RoleId && role.Name == IdentitySeeder.DepartmentRole))
+            .Select(userRole => userRole.UserId);
+
+        var pagedUsers = await PagedResult<IdentityUser>.CreateAsync(
+            usersQuery
+                .OrderBy(user => adminIds.Contains(user.Id) ? 0 :
+                    departmentIds.Contains(user.Id) ? 1 : 2)
+                .ThenBy(user => user.UserName),
+            page);
+        var currentUserId = _userManager.GetUserId(User);
+        var managedUsers = new List<ManagedUserViewModel>(pagedUsers.Items.Count);
+
+        foreach (var user in pagedUsers.Items)
         {
             var roles = await _userManager.GetRolesAsync(user);
-            if (!string.IsNullOrWhiteSpace(roleFilter) &&
-                !roles.Contains(roleFilter, StringComparer.Ordinal))
-            {
-                continue;
-            }
-
             var selectedRole = roles.Contains(IdentitySeeder.AdminRole, StringComparer.Ordinal)
                 ? IdentitySeeder.AdminRole
                 : roles.Contains(IdentitySeeder.DepartmentRole, StringComparer.Ordinal)
@@ -80,7 +116,16 @@ public class UsersController : Controller
 
         ViewData["CurrentFilter"] = searchString;
         ViewData["RoleFilter"] = roleFilter;
-        return View(managedUsers);
+        ViewData["StatusFilter"] = statusFilter;
+        var result = new PagedResult<ManagedUserViewModel>
+        {
+            Items = managedUsers,
+            CurrentPage = pagedUsers.CurrentPage,
+            PageSize = pagedUsers.PageSize,
+            TotalItems = pagedUsers.TotalItems,
+            TotalPages = pagedUsers.TotalPages
+        };
+        return View(result);
     }
 
     [Authorize(Roles = IdentitySeeder.AdminRole)]

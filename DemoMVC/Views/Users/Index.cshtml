@@ -1,8 +1,9 @@
-@model IEnumerable<ManagedUserViewModel>
+@model DemoMVC.ViewModels.PagedResult<ManagedUserViewModel>
 @{
     ViewData["Title"] = "Quản lý tài khoản";
     var currentFilter = ViewData["CurrentFilter"] as string ?? string.Empty;
     var roleFilter = ViewData["RoleFilter"] as string ?? string.Empty;
+    var statusFilter = ViewData["StatusFilter"] as string ?? string.Empty;
     var canManageAccounts = User.IsInRole("Admin");
 }
 
@@ -11,6 +12,7 @@
         <h1 class="h2 mb-1">Quản lý tài khoản</h1>
         <p class="text-muted mb-0">Danh sách người dùng và vai trò được cấp.</p>
     </div>
+
     @if (canManageAccounts)
     {
         <a asp-action="Create" class="btn btn-primary">Tạo tài khoản</a>
@@ -46,6 +48,16 @@
     </div>
 </form>
 
+<div class="mb-3">
+    <span class="fw-semibold me-2">Trạng thái:</span>
+    <a asp-action="Index" asp-route-searchString="@currentFilter" asp-route-roleFilter="@roleFilter"
+       asp-route-statusFilter="" class="btn btn-sm @(statusFilter == "" ? "btn-primary" : "btn-outline-primary")">Tất cả</a>
+    <a asp-action="Index" asp-route-searchString="@currentFilter" asp-route-roleFilter="@roleFilter"
+       asp-route-statusFilter="active" class="btn btn-sm @(statusFilter == "active" ? "btn-primary" : "btn-outline-primary")">Hoạt động</a>
+    <a asp-action="Index" asp-route-searchString="@currentFilter" asp-route-roleFilter="@roleFilter"
+       asp-route-statusFilter="locked" class="btn btn-sm @(statusFilter == "locked" ? "btn-primary" : "btn-outline-primary")">Đang khóa</a>
+</div>
+
 <div class="table-responsive bg-white rounded-3 shadow-sm">
     <table class="table table-hover align-middle mb-0">
         <thead class="table-light">
@@ -61,7 +73,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var user in Model)
+            @foreach (var user in Model.Items)
             {
                 <tr>
                     <td>
@@ -112,7 +124,7 @@
                     }
                 </tr>
             }
-            @if (!Model.Any())
+            @if (Model.Items.Count == 0)
             {
                 <tr>
                     <td colspan="@(canManageAccounts ? 5 : 4)" class="py-4 text-center text-muted">
@@ -123,3 +135,18 @@
         </tbody>
     </table>
 </div>
+
+<partial name="_Pagination" model='new DemoMVC.ViewModels.PaginationViewModel {
+    CurrentPage = Model.CurrentPage,
+    TotalPages = Model.TotalPages,
+    TotalItems = Model.TotalItems,
+    PageSize = Model.PageSize,
+    FirstItem = Model.FirstItem,
+    LastItem = Model.LastItem,
+    Action = "Index",
+    SearchString = currentFilter,
+    RouteValues = new Dictionary<string, object?> {
+        ["roleFilter"] = roleFilter,
+        ["statusFilter"] = statusFilter
+    }
+}' />
